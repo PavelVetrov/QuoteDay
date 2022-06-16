@@ -15,4 +15,9 @@
         android:id="@+id/quotesFragment"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
         android:title="Quotes" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="Settings" />
 </menu>
