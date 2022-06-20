@@ -21,6 +21,7 @@ class ViewModalSettingFragment(application: Application): AndroidViewModel(appli
     private val _responseQuoteDay = MutableLiveData<Response<Quotes>>()
     val responseQuoteDay: LiveData<Response<Quotes>> = _responseQuoteDay
 
+
     fun getQuoteDay() {
         viewModelScope.launch {
             try {
