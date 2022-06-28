@@ -37,7 +37,6 @@ class FavoriteFragment : Fragment() {
         viewModal.favoriteQuotes.observe(viewLifecycleOwner) {
             viewAdapterFavoriteQuotes.submitList(it)
 
-
         }
 
     }
@@ -54,7 +53,6 @@ class FavoriteFragment : Fragment() {
                 override fun onClickDeleteQuote(quotesItem: QuotesItem) {
                     viewModal.deleteQuotes(quotesItem)
                 }
-
             }
     }
 }

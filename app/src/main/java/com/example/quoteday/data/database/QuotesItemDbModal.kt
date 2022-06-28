@@ -8,5 +8,6 @@ data class QuotesItemDbModal(
     @PrimaryKey
     val id: Int,
     val quotes: String,
-    val author: String
+    val author: String,
+
 )

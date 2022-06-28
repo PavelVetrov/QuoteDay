@@ -9,7 +9,7 @@ interface RepositoryQuotes {
 
   suspend fun getQuotesListDto(): Response<Quotes>
 
-  suspend fun getQuoteDayDto(): Response<Quotes>
+  suspend fun getQuoteDayDto():  Response<Quotes>
 
   fun getFavoriteQuotesDb(): LiveData<List<QuotesItem>>
 

@@ -19,4 +19,5 @@ interface QuotesItemDao {
    suspend fun addFavoriteQuote(quotesItemDbModal: QuotesItemDbModal)
 
 
+
 }

@@ -10,10 +10,10 @@ import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuotesItem
 import retrofit2.Response
 
-class RepositoryQuotesImpl(application: Application): RepositoryQuotes {
+class RepositoryQuotesImpl(application: Application) : RepositoryQuotes {
 
-    val mapper = QuotesMapper()
-    val quotesDao = AppDataBase.getInstance(application).quotesItemDao()
+    private val mapper = QuotesMapper()
+    private val quotesDao = AppDataBase.getInstance(application).quotesItemDao()
 
     override suspend fun getQuotesListDto(): Response<Quotes> {
         return ApiFactory.apiService.getQuoteList()
@@ -24,7 +24,7 @@ class RepositoryQuotesImpl(application: Application): RepositoryQuotes {
     }
 
     override fun getFavoriteQuotesDb(): LiveData<List<QuotesItem>> =
-        Transformations.map(quotesDao.getQuotesList()){
+        Transformations.map(quotesDao.getQuotesList()) {
             mapper.mapListDbModalToEntity(it)
         }
 
@@ -35,4 +35,5 @@ class RepositoryQuotesImpl(application: Application): RepositoryQuotes {
     override suspend fun addFavoriteQuote(quotesItem: QuotesItem) {
         quotesDao.addFavoriteQuote(mapper.mapEntityToDbModal(quotesItem))
     }
+
 }

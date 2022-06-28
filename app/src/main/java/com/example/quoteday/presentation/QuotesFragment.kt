@@ -38,9 +38,9 @@ class QuotesFragment : Fragment() {
 
 
 
-        viewModel.getQuotesList.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                it.body()?.let {
+        viewModel.getQuotesList.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                response.body()?.let {
                     viewAdapterQuotes.submitList(it)
                     binding.progressBarQuotes.visibility = View.INVISIBLE
 
@@ -63,7 +63,6 @@ class QuotesFragment : Fragment() {
                     viewModel.addFavoriteQuote(quotesItem)
                 }
             }
-
 
     }
 }

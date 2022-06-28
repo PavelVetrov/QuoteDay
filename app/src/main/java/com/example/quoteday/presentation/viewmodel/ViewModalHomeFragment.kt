@@ -29,7 +29,6 @@ class ViewModalHomeFragment (application: Application): AndroidViewModel(applica
         }
     }
 
-
     fun getQuoteDay() {
         viewModelScope.launch {
             try {

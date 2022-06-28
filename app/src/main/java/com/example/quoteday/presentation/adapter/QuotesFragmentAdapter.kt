@@ -29,12 +29,19 @@ class QuotesFragmentAdapter :
         holder.binding.bottomSave.setOnClickListener {
 
             onClickListenerSaveFavorite?.onClickSaveFavorite(quotes)
+
+            true
         }
 
     }
     interface OnClickListenerSaveFavorite{
 
         fun onClickSaveFavorite(quotesItem: QuotesItem)
+    }
+
+    companion object{
+        const val VIEW_TYPE_ENABLED = 0
+        const val VIEW_TYPE_DISABLED = 1
     }
 }
 
