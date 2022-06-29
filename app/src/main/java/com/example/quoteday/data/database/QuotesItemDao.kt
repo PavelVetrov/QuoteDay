@@ -13,11 +13,10 @@ interface QuotesItemDao {
     fun getQuotesList(): LiveData<List<QuotesItemDbModal>>
 
     @Query("DELETE FROM quotes_item WHERE id=:quoteItemId")
-   suspend fun deleteQuote(quoteItemId: Int)
+    suspend fun deleteQuote(quoteItemId: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun addFavoriteQuote(quotesItemDbModal: QuotesItemDbModal)
-
+    suspend fun addFavoriteQuote(quotesItemDbModal: QuotesItemDbModal)
 
 
 }

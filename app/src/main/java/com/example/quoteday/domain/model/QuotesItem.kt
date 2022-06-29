@@ -5,4 +5,5 @@ data class QuotesItem(
     val q: String,
     var c: Int,
 
-)
+
+    )

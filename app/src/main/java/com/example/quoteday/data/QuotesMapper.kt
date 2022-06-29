@@ -6,10 +6,10 @@ import com.example.quoteday.domain.model.QuotesItem
 class QuotesMapper {
 
 
-  private  fun mapDbModalToEntity(dbModal: QuotesItemDbModal)= QuotesItem(
+    private fun mapDbModalToEntity(dbModal: QuotesItemDbModal) = QuotesItem(
         a = dbModal.author,
         q = dbModal.quotes,
-        c = dbModal.id,
+        c = dbModal.id
 
 
     )
@@ -17,8 +17,7 @@ class QuotesMapper {
     fun mapEntityToDbModal(quotesItem: QuotesItem) = QuotesItemDbModal(
         id = quotesItem.c,
         quotes = quotesItem.q,
-        author = quotesItem.a,
-
+        author = quotesItem.a
     )
 
     fun mapListDbModalToEntity(list: List<QuotesItemDbModal>) = list.map {

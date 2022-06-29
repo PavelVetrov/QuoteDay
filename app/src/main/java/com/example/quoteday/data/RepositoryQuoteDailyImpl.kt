@@ -5,7 +5,7 @@ import com.example.quoteday.domain.RepositoryQuotesDaily
 import com.example.quoteday.domain.model.Quotes
 import retrofit2.Response
 
-class RepositoryQuoteDailyImpl: RepositoryQuotesDaily {
+class RepositoryQuoteDailyImpl : RepositoryQuotesDaily {
 
     override suspend fun getQuoteDailyDto(): Response<Quotes> {
         return ApiFactory.apiService.getQuoteDaily()

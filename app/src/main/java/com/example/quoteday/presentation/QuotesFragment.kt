@@ -1,5 +1,6 @@
 package com.example.quoteday.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,6 @@ class QuotesFragment : Fragment() {
     private lateinit var viewModel: ViewModalQuotesFragment
     private lateinit var viewAdapterQuotes: QuotesFragmentAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,8 +36,6 @@ class QuotesFragment : Fragment() {
 
         viewModel.getQuotesList()
 
-
-
         viewModel.getQuotesList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.let {
@@ -45,7 +43,7 @@ class QuotesFragment : Fragment() {
                     binding.progressBarQuotes.visibility = View.INVISIBLE
 
                 }
-            }
+            } else binding.progressBarQuotes.visibility = View.VISIBLE
         }
 
     }
@@ -61,6 +59,21 @@ class QuotesFragment : Fragment() {
 
                 override fun onClickSaveFavorite(quotesItem: QuotesItem) {
                     viewModel.addFavoriteQuote(quotesItem)
+                }
+
+            }
+        viewAdapterQuotes.onClickListenerShareQuote =
+            object : QuotesFragmentAdapter.OnClickListenerShareQuote {
+                override fun onClickShare(quotesItem: QuotesItem) {
+                    val message = quotesItem.q
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, message)
+                        type = "text/plain"
+                    }
+
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
                 }
             }
 

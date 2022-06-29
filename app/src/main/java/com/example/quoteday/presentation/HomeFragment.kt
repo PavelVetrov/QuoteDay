@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quoteday.databinding.FragmentHomeBinding
@@ -36,7 +35,6 @@ class HomeFragment : Fragment() {
         viewModel.getQuoteDay()
 
         viewModel.responseQuoteDay.observe(viewLifecycleOwner) { response ->
-
             if (response.isSuccessful) {
                 response.body()?.let {
                     val gsonPars = it[0]
@@ -45,15 +43,13 @@ class HomeFragment : Fragment() {
                     binding.progressBar.visibility = View.INVISIBLE
                     clickFavoriteButton(gsonPars)
                     clickShareButton(gsonPars)
-
                 }
-
-            }else Toast.makeText(requireActivity(),"error", Toast.LENGTH_SHORT).show()
+            } else binding.progressBar.visibility = View.VISIBLE
 
         }
     }
 
-    private fun clickFavoriteButton(quotesItem: QuotesItem){
+    private fun clickFavoriteButton(quotesItem: QuotesItem) {
 
         binding.buttonFavorite.setOnClickListener {
             viewModel.addFavoriteQuote(quotesItem)
@@ -62,10 +58,12 @@ class HomeFragment : Fragment() {
                 duration = 1000
                 rotationY(360f)
             }.start()
+
+            binding.buttonFavorite.setColorFilter(Color.RED)
         }
     }
 
-    private fun clickShareButton(quotesItem: QuotesItem){
+    private fun clickShareButton(quotesItem: QuotesItem) {
 
         binding.shareButton.setOnClickListener {
 
@@ -75,11 +73,9 @@ class HomeFragment : Fragment() {
                 putExtra(Intent.EXTRA_TEXT, message)
                 type = "text/plain"
             }
-
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }
-        }
-
+    }
 
 }

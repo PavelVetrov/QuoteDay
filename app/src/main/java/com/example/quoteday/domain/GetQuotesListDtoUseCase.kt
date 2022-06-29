@@ -4,5 +4,5 @@ class GetQuotesListDtoUseCase(
     private val repositoryQuotes: RepositoryQuotes
 ) {
 
-  suspend operator fun  invoke() = repositoryQuotes.getQuotesListDto()
+    suspend operator fun invoke() = repositoryQuotes.getQuotesListDto()
 }

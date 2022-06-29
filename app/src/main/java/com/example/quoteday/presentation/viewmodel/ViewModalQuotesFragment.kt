@@ -1,6 +1,7 @@
 package com.example.quoteday.presentation.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,6 @@ import com.example.quoteday.domain.GetQuotesListDtoUseCase
 import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuotesItem
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import retrofit2.Response
 
 class ViewModalQuotesFragment(application: Application) : AndroidViewModel(application) {
@@ -27,14 +27,16 @@ class ViewModalQuotesFragment(application: Application) : AndroidViewModel(appli
 
     fun getQuotesList() {
 
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+
+            try {
                 val quotesList = getQuotesListDto.invoke()
                 _getQuotesList.value = quotesList
+
+                Log.d("ViewModalQuotesFragment", "$quotesList")
+            } catch (e: Exception) {
+
             }
-
-        } catch (e: HttpException) {
-
         }
     }
 
@@ -43,5 +45,4 @@ class ViewModalQuotesFragment(application: Application) : AndroidViewModel(appli
             addFavoriteQuoteUseCase.invoke(quotesItem)
         }
     }
-
 }

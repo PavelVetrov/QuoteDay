@@ -47,11 +47,9 @@ class SettingsFragment : Fragment() {
             preferences.edit().putInt(TIME_MINUTE, minuteSave).apply()
 
             scheduleNotification()
-
         }
 
         createNotificationChannel()
-
 
         binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -108,7 +106,6 @@ class SettingsFragment : Fragment() {
         alarmManager.cancel(
             pendingIntent
         )
-
 
     }
 
@@ -172,7 +169,6 @@ class SettingsFragment : Fragment() {
 
         }
     }
-
 
     companion object {
         private const val DEFAULT_TIME = 1

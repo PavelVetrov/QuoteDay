@@ -18,7 +18,6 @@ class FavoriteFragment : Fragment() {
     private lateinit var viewModal: ViewModalFavoriteFragment
     private lateinit var viewAdapterFavoriteQuotes: QuotesFavoriteAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -7,14 +7,14 @@ import retrofit2.Response
 
 interface RepositoryQuotes {
 
-  suspend fun getQuotesListDto(): Response<Quotes>
+    suspend fun getQuotesListDto(): Response<Quotes>
 
-  suspend fun getQuoteDayDto():  Response<Quotes>
+    suspend fun getQuoteDayDto(): Response<Quotes>
 
-  fun getFavoriteQuotesDb(): LiveData<List<QuotesItem>>
+    fun getFavoriteQuotesDb(): LiveData<List<QuotesItem>>
 
-  suspend fun deleteFavoriteQuote(quotesItem: QuotesItem)
+    suspend fun deleteFavoriteQuote(quotesItem: QuotesItem)
 
-  suspend fun addFavoriteQuote(quotesItem: QuotesItem)
+    suspend fun addFavoriteQuote(quotesItem: QuotesItem)
 
 }

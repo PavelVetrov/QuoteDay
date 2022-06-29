@@ -9,18 +9,18 @@ import com.example.quoteday.domain.GetFavoriteQuotesDbUseCase
 import com.example.quoteday.domain.model.QuotesItem
 import kotlinx.coroutines.launch
 
-class ViewModalFavoriteFragment(application: Application): AndroidViewModel(application) {
+class ViewModalFavoriteFragment(application: Application) : AndroidViewModel(application) {
 
     private val repositoryQuotesImpl = RepositoryQuotesImpl(application)
 
-   private val favoriteQuotesDbUseCase = GetFavoriteQuotesDbUseCase(repositoryQuotesImpl)
+    private val favoriteQuotesDbUseCase = GetFavoriteQuotesDbUseCase(repositoryQuotesImpl)
 
     private val deleteFavoriteQuoteUseCase = DeleteFavoriteQuoteUseCase(repositoryQuotesImpl)
 
     val favoriteQuotes = favoriteQuotesDbUseCase.invoke()
 
-    fun deleteQuotes(quotesItem: QuotesItem){
-        viewModelScope.launch{
+    fun deleteQuotes(quotesItem: QuotesItem) {
+        viewModelScope.launch {
             deleteFavoriteQuoteUseCase.invoke(quotesItem)
         }
     }

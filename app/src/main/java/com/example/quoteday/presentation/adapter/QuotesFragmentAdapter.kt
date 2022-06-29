@@ -1,10 +1,9 @@
 package com.example.quoteday.presentation.adapter
 
-import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.example.quoteday.databinding.FragmentQuotesBinding
 import com.example.quoteday.databinding.QuotesItemBinding
 import com.example.quoteday.domain.model.QuotesItem
 
@@ -12,6 +11,7 @@ class QuotesFragmentAdapter :
     ListAdapter<QuotesItem, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()) {
 
     var onClickListenerSaveFavorite: OnClickListenerSaveFavorite? = null
+    var onClickListenerShareQuote: OnClickListenerShareQuote? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteFragmentViewHolder {
         val binding = QuotesItemBinding.inflate(
@@ -26,22 +26,35 @@ class QuotesFragmentAdapter :
         val quotes = getItem(position)
         holder.binding.quotesText.text = quotes.q
         holder.binding.quoteAuthor.text = quotes.a
-        holder.binding.bottomSave.setOnClickListener {
+        holder.binding.buttonSave.setOnClickListener {
+            holder.binding.buttonSave.animate().apply {
+                duration = 1000
+                rotationY(360f)
+            }.start()
+
+            holder.binding.buttonSave.setColorFilter(Color.RED)
 
             onClickListenerSaveFavorite?.onClickSaveFavorite(quotes)
 
-            true
+        }
+        holder.binding.shareButton.setOnClickListener {
+
+            onClickListenerShareQuote?.onClickShare(quotes)
         }
 
     }
-    interface OnClickListenerSaveFavorite{
+
+    interface OnClickListenerSaveFavorite {
 
         fun onClickSaveFavorite(quotesItem: QuotesItem)
+
     }
 
-    companion object{
-        const val VIEW_TYPE_ENABLED = 0
-        const val VIEW_TYPE_DISABLED = 1
+    interface OnClickListenerShareQuote {
+
+        fun onClickShare(quotesItem: QuotesItem)
     }
+
+
 }
 

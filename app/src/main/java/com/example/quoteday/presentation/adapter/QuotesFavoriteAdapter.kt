@@ -7,7 +7,7 @@ import com.example.quoteday.databinding.QuotesFavoriteItemBinding
 import com.example.quoteday.domain.model.QuotesItem
 
 class QuotesFavoriteAdapter :
-    ListAdapter<QuotesItem, QuotesFavoriteViewHolder>(QuotesFavoriteDiffCallBack()) {
+    ListAdapter<QuotesItem, QuotesFavoriteViewHolder>(QuotesFragmentDiffCallBack()) {
 
     var onClickListenerDeleteQuote: OnClickListenerDeleteQuote? = null
 
@@ -28,10 +28,8 @@ class QuotesFavoriteAdapter :
 
     }
 
-
-    interface OnClickListenerDeleteQuote{
+    interface OnClickListenerDeleteQuote {
 
         fun onClickDeleteQuote(quotesItem: QuotesItem)
-
     }
 }
