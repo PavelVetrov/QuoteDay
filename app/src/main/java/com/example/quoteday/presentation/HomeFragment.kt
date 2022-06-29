@@ -1,5 +1,6 @@
 package com.example.quoteday.presentation
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quoteday.databinding.FragmentHomeBinding
 import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.presentation.viewmodel.ViewModalFactory
 import com.example.quoteday.presentation.viewmodel.ViewModalHomeFragment
+import javax.inject.Inject
 
 
 class HomeFragment : Fragment() {
@@ -18,6 +21,18 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: ViewModalHomeFragment
+
+    @Inject
+    lateinit var viewModalFactory: ViewModalFactory
+
+    private val component by lazy {
+        (requireActivity().application as QuotesApplication).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[ViewModalHomeFragment::class.java]
+        viewModel = ViewModelProvider(this, viewModalFactory)[ViewModalHomeFragment::class.java]
 
 
         viewModel.getQuoteDay()

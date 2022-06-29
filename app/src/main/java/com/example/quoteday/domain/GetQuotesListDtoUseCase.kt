@@ -1,6 +1,8 @@
 package com.example.quoteday.domain
 
-class GetQuotesListDtoUseCase(
+import javax.inject.Inject
+
+class GetQuotesListDtoUseCase @Inject constructor(
     private val repositoryQuotes: RepositoryQuotes
 ) {
 

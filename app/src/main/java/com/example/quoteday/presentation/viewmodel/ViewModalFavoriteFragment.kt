@@ -1,21 +1,18 @@
 package com.example.quoteday.presentation.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.data.RepositoryQuotesImpl
 import com.example.quoteday.domain.DeleteFavoriteQuoteUseCase
 import com.example.quoteday.domain.GetFavoriteQuotesDbUseCase
 import com.example.quoteday.domain.model.QuotesItem
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ViewModalFavoriteFragment(application: Application) : AndroidViewModel(application) {
+class ViewModalFavoriteFragment @Inject constructor(
+    private val favoriteQuotesDbUseCase: GetFavoriteQuotesDbUseCase,
+    private val deleteFavoriteQuoteUseCase: DeleteFavoriteQuoteUseCase
+) : ViewModel() {
 
-    private val repositoryQuotesImpl = RepositoryQuotesImpl(application)
-
-    private val favoriteQuotesDbUseCase = GetFavoriteQuotesDbUseCase(repositoryQuotesImpl)
-
-    private val deleteFavoriteQuoteUseCase = DeleteFavoriteQuoteUseCase(repositoryQuotesImpl)
 
     val favoriteQuotes = favoriteQuotesDbUseCase.invoke()
 

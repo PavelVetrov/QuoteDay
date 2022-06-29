@@ -2,8 +2,9 @@ package com.example.quoteday.data
 
 import com.example.quoteday.data.database.QuotesItemDbModal
 import com.example.quoteday.domain.model.QuotesItem
+import javax.inject.Inject
 
-class QuotesMapper {
+class QuotesMapper @Inject constructor() {
 
 
     private fun mapDbModalToEntity(dbModal: QuotesItemDbModal) = QuotesItem(

@@ -4,16 +4,21 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.quoteday.data.database.AppDataBase
+import com.example.quoteday.data.database.QuotesItemDao
 import com.example.quoteday.data.network.ApiFactory
 import com.example.quoteday.domain.RepositoryQuotes
 import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuotesItem
 import retrofit2.Response
+import javax.inject.Inject
 
-class RepositoryQuotesImpl(application: Application) : RepositoryQuotes {
+class RepositoryQuotesImpl @Inject constructor(
+    private val mapper: QuotesMapper,
+    private val quotesDao: QuotesItemDao
+) : RepositoryQuotes {
 
-    private val mapper = QuotesMapper()
-    private val quotesDao = AppDataBase.getInstance(application).quotesItemDao()
+//    private val mapper = QuotesMapper()
+//    private val quotesDao = AppDataBase.getInstance(application).quotesItemDao()
 
     override suspend fun getQuotesListDto(): Response<Quotes> {
         return ApiFactory.apiService.getQuoteList()

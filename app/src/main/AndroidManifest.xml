@@ -13,14 +13,11 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".presentation.QuotesApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuoteDay"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivityNotConnect"
-            android:exported="false" />
-
         <receiver
             android:name=".presentation.Notification"
             android:enabled="true" />

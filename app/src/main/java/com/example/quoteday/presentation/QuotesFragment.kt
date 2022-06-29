@@ -1,5 +1,6 @@
 package com.example.quoteday.presentation
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.quoteday.databinding.FragmentQuotesBinding
 import com.example.quoteday.domain.model.QuotesItem
 import com.example.quoteday.presentation.adapter.QuotesFragmentAdapter
+import com.example.quoteday.presentation.viewmodel.ViewModalFactory
 import com.example.quoteday.presentation.viewmodel.ViewModalQuotesFragment
+import javax.inject.Inject
 
 
 class QuotesFragment : Fragment() {
@@ -18,6 +21,18 @@ class QuotesFragment : Fragment() {
     private lateinit var binding: FragmentQuotesBinding
     private lateinit var viewModel: ViewModalQuotesFragment
     private lateinit var viewAdapterQuotes: QuotesFragmentAdapter
+
+    @Inject
+    lateinit var viewModalFactory: ViewModalFactory
+
+    private val component by lazy {
+        (requireActivity().application as QuotesApplication).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +45,7 @@ class QuotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[ViewModalQuotesFragment::class.java]
+        viewModel = ViewModelProvider(this, viewModalFactory)[ViewModalQuotesFragment::class.java]
 
         initRecycleView()
 

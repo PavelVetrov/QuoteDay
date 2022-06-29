@@ -1,26 +1,22 @@
 package com.example.quoteday.presentation.viewmodel
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.data.RepositoryQuotesImpl
 import com.example.quoteday.domain.AddFavoriteQuoteUseCase
 import com.example.quoteday.domain.GetQuotesListDtoUseCase
 import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuotesItem
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class ViewModalQuotesFragment(application: Application) : AndroidViewModel(application) {
+class ViewModalQuotesFragment @Inject constructor(
+    private val addFavoriteQuoteUseCase: AddFavoriteQuoteUseCase,
+    private val getQuotesListDto: GetQuotesListDtoUseCase
+) : ViewModel() {
 
-    private val repositoryQuotesImpl = RepositoryQuotesImpl(application)
-
-    private val addFavoriteQuoteUseCase = AddFavoriteQuoteUseCase(repositoryQuotesImpl)
-
-    private val getQuotesListDto = GetQuotesListDtoUseCase(repositoryQuotesImpl)
 
     private val _getQuotesList = MutableLiveData<Response<Quotes>>()
     val getQuotesList: LiveData<Response<Quotes>> = _getQuotesList
@@ -33,7 +29,6 @@ class ViewModalQuotesFragment(application: Application) : AndroidViewModel(appli
                 val quotesList = getQuotesListDto.invoke()
                 _getQuotesList.value = quotesList
 
-                Log.d("ViewModalQuotesFragment", "$quotesList")
             } catch (e: Exception) {
 
             }

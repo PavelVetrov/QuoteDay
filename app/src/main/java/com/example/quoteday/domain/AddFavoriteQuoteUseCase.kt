@@ -1,8 +1,9 @@
 package com.example.quoteday.domain
 
 import com.example.quoteday.domain.model.QuotesItem
+import javax.inject.Inject
 
-class AddFavoriteQuoteUseCase(
+class AddFavoriteQuoteUseCase @Inject constructor(
     private val repositoryQuotes: RepositoryQuotes
 ) {
 
