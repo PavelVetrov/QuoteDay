@@ -22,6 +22,7 @@ class Notification : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
+
         GlobalScope.launch {
             val getDate = getQuotesDailyUseCase.invoke()
             if (getDate.isSuccessful) {
@@ -32,7 +33,7 @@ class Notification : BroadcastReceiver() {
                         val massageAuthor = getQuotesDaily.a
                         delay(3000)
                         val notification = NotificationCompat.Builder(context, CHANNEL)
-                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setSmallIcon(R.drawable.ic_baseline_grade_24)
                             .setContentTitle(massageAuthor)
                             .setContentText(massageQuote)
                             .setStyle(NotificationCompat.BigTextStyle())

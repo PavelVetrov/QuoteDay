@@ -11,12 +11,11 @@
         android:id="@+id/rv_favorite_quotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/quotes_favorite_item"
-        />
+        tools:listitem="@layout/quotes_favorite_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
