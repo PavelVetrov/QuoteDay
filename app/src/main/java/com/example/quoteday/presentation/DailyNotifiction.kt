@@ -6,8 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.example.quoteday.R
-import com.example.quoteday.data.RepositoryQuoteDailyImpl
-import com.example.quoteday.domain.GetQuotesDailyUseCase
+import com.example.quoteday.data.network.ApiFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,18 +14,15 @@ import kotlinx.coroutines.launch
 const val NOTIFICATION_ID = 1
 const val CHANNEL = "channel"
 
-class Notification : BroadcastReceiver() {
+class DailyNotification : BroadcastReceiver() {
 
-    private var repositoryQuoteDailyImpl = RepositoryQuoteDailyImpl()
-    private val getQuotesDailyUseCase = GetQuotesDailyUseCase(repositoryQuoteDailyImpl)
 
     override fun onReceive(context: Context, intent: Intent) {
 
-
         GlobalScope.launch {
-            val getDate = getQuotesDailyUseCase.invoke()
-            if (getDate.isSuccessful) {
-                getDate.body()?.let {
+             val dailyQuote = ApiFactory.apiService.getQuoteDay()
+            if (dailyQuote.isSuccessful) {
+                dailyQuote.body()?.let {
                     try {
                         val getQuotesDaily = it[0]
                         val massageQuote = getQuotesDaily.q

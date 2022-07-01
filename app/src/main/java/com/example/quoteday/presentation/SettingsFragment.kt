@@ -69,7 +69,7 @@ class SettingsFragment : Fragment() {
 
     private fun scheduleNotification() {
 
-        val intent = Intent(requireContext(), Notification::class.java)
+        val intent = Intent(requireContext(), DailyNotification::class.java)
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
@@ -93,7 +93,7 @@ class SettingsFragment : Fragment() {
 
     private fun scheduleNotificationCancel() {
 
-        val intent = Intent(requireContext(), Notification::class.java)
+        val intent = Intent(requireContext(), DailyNotification::class.java)
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),

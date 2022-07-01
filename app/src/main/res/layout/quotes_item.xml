@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/quotes_favorite_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -37,6 +36,7 @@
             android:layout_marginStart="65dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="@string/favorite_quote"
             android:src="@drawable/ic_baseline_favorite_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +49,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="65dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="@string/share_quote"
             android:src="@drawable/ic_baseline_share_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

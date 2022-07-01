@@ -58,6 +58,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:background="@color/transparent"
+                android:contentDescription="@string/favorite_quote"
                 android:src="@drawable/ic_baseline_favorite_24" />
 
             <ImageButton
@@ -68,6 +69,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:background="@color/transparent"
+                android:contentDescription="@string/share_quote"
                 android:src="@drawable/ic_baseline_share_24" />
 
         </LinearLayout>

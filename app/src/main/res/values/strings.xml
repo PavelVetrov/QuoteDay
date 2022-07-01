@@ -4,5 +4,10 @@
     <string name="quote">Learn to use your emotions to think, not think with your emotions.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="share_quote">share quote</string>
+    <string name="favorite_quote">favorite quote</string>
+    <string name="delete_quote">delete quote</string>
+    <string name="save_settings_button">Save Settings</string>
+    <string name="daily_notifications">Daily notifications</string>
 
 </resources>

@@ -12,6 +12,4 @@ interface ApiService {
     @GET("today")
     suspend fun getQuoteDay(): Response<Quotes>
 
-    @GET("today")
-    suspend fun getQuoteDaily(): Response<Quotes>
 }
