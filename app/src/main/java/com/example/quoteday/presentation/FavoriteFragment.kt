@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteBinding
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModal: ViewModalFavoriteFragment
     private lateinit var viewAdapterFavoriteQuotes: QuotesFavoriteAdapter
 
@@ -37,7 +38,7 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,5 +69,11 @@ class FavoriteFragment : Fragment() {
                     viewModal.deleteQuotes(quotesItem)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        _binding = null
     }
 }

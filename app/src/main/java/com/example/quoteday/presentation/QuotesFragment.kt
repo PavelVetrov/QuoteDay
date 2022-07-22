@@ -18,7 +18,8 @@ import javax.inject.Inject
 
 class QuotesFragment : Fragment() {
 
-    private lateinit var binding: FragmentQuotesBinding
+    private var _binding: FragmentQuotesBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: ViewModalQuotesFragment
     private lateinit var viewAdapterQuotes: QuotesFragmentAdapter
 
@@ -38,7 +39,7 @@ class QuotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentQuotesBinding.inflate(inflater, container, false)
+        _binding = FragmentQuotesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -91,6 +92,10 @@ class QuotesFragment : Fragment() {
                     startActivity(shareIntent)
                 }
             }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
