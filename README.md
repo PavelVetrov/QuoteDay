@@ -2,11 +2,12 @@
 
 ## Libraries
 + MVVM Architecture
-+ Architecture Components (Lifecycle, LiveData, ViewModel, ViewBinding, Room)
++ Architecture Components (Lifecycle, LiveData, ViewModel, Navigation, ViewBinding, Room)
 + RecyclerView and CardViews
 + [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 + [Dagger2](https://github.com/google/dagger) for dependency injection
 + [Retrofit2 & Gson](https://github.com/square/retrofit) for REST API
++ [LeakCanary](https://square.github.io/leakcanary/) for detecting memory leak
 
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/99405613/180963099-2a451b68-548b-45f0-9ba2-504417d6aee7.jpg" width="200"> <img src="https://user-images.githubusercontent.com/99405613/180963103-92fa5d68-387a-49e1-bf3f-1f58e6ce49fc.jpg" width="200">
