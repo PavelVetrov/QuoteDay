@@ -1,5 +1,5 @@
 # QuoteDay
-The Quote of the Day mobile application is built on the basis of Solid principles using the MVVM design pattern and a stack of modern technologies. The application implements viewing the quote of the day with the ability to add it to favorites and with the ability to receive it as a message at a given time. Also in the application there is an opportunity to view other quotes in the form of a list.
+The QuoteDay mobile application is built on the basis of Solid principles using the MVVM design pattern and a stack of modern technologies. The application implements viewing the quote of the day with the ability to add it to favorites and with the ability to receive it as a message at a given time. Also in the application there is an opportunity to view other quotes in the form of a list.
 
 
 ## Libraries
