@@ -4,12 +4,11 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.quoteday.R
 import com.example.quoteday.data.network.ApiFactory
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 const val NOTIFICATION_ID = 1
 const val CHANNEL = "channel"
@@ -17,10 +16,14 @@ const val CHANNEL = "channel"
 class DailyNotification : BroadcastReceiver() {
 
 
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
+
     override fun onReceive(context: Context, intent: Intent) {
 
-        GlobalScope.launch {
-             val dailyQuote = ApiFactory.apiService.getQuoteDay()
+
+        coroutineScope.launch {
+            val dailyQuote = ApiFactory.apiService.getQuoteDay()
             if (dailyQuote.isSuccessful) {
                 dailyQuote.body()?.let {
                     try {
@@ -38,11 +41,15 @@ class DailyNotification : BroadcastReceiver() {
                             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                         manager.notify(NOTIFICATION_ID, notification)
 
+
                     } catch (e: Exception) {
 
                     }
                 }
             }
         }
+
     }
+
+
 }

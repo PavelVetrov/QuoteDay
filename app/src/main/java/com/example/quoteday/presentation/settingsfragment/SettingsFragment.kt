@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation
+package com.example.quoteday.presentation.settingsfragment
 
 import android.app.AlarmManager
 import android.app.NotificationChannel
@@ -17,6 +17,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.quoteday.databinding.FragmentSettingsBinding
+import com.example.quoteday.presentation.CHANNEL
+import com.example.quoteday.presentation.DailyNotification
+import com.example.quoteday.presentation.NOTIFICATION_ID
 import java.util.*
 
 

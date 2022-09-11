@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.SettingsFragment">
+    tools:context=".presentation.settingsfragment.SettingsFragment">
 
 
     <TextView
         android:id="@+id/text_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/margin_16"
         android:text="@string/daily_notifications"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_18"
         app:layout_constraintBottom_toBottomOf="@+id/switch_notification"
         app:layout_constraintEnd_toStartOf="@+id/switch_notification"
         app:layout_constraintTop_toTopOf="@+id/switch_notification" />
@@ -22,9 +22,9 @@
         android:id="@+id/switch_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:minWidth="@dimen/size_switch_48"
+        android:minHeight="@dimen/size_switch_48"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_picker"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -41,7 +41,7 @@
         android:id="@+id/button_save_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="@dimen/margin_32"
         android:enabled="false"
         android:text="@string/save_settings_button"
         android:textColor="@color/black"

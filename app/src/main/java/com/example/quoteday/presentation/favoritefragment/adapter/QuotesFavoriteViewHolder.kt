@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.adapter
+package com.example.quoteday.presentation.favoritefragment.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quoteday.databinding.QuotesFavoriteItemBinding

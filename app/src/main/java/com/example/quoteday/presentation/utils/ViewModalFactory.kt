@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.viewmodel
+package com.example.quoteday.presentation.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

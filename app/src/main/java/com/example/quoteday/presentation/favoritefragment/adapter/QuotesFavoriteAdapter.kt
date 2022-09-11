@@ -1,10 +1,11 @@
-package com.example.quoteday.presentation.adapter
+package com.example.quoteday.presentation.favoritefragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.quoteday.databinding.QuotesFavoriteItemBinding
 import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.presentation.utils.QuotesFragmentDiffCallBack
 
 class QuotesFavoriteAdapter :
     ListAdapter<QuotesItem, QuotesFavoriteViewHolder>(QuotesFragmentDiffCallBack()) {

@@ -1,9 +1,9 @@
 package com.example.quoteday.di
 
 import androidx.lifecycle.ViewModel
-import com.example.quoteday.presentation.viewmodel.ViewModalFavoriteFragment
-import com.example.quoteday.presentation.viewmodel.ViewModalHomeFragment
-import com.example.quoteday.presentation.viewmodel.ViewModalQuotesFragment
+import com.example.quoteday.presentation.favoritefragment.ViewModalFavoriteFragment
+import com.example.quoteday.presentation.homefragment.ViewModalHomeFragment
+import com.example.quoteday.presentation.quotesfragment.ViewModalQuotesFragment
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
