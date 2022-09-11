@@ -1,5 +1,6 @@
-package com.example.quoteday.domain
+package com.example.quoteday.domain.usecases
 
+import com.example.quoteday.domain.RepositoryQuotes
 import javax.inject.Inject
 
 class GetQuotesListDtoUseCase @Inject constructor(

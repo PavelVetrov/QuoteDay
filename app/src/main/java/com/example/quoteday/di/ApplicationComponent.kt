@@ -1,10 +1,10 @@
 package com.example.quoteday.di
 
 import android.app.Application
-import com.example.quoteday.presentation.FavoriteFragment
-import com.example.quoteday.presentation.HomeFragment
+import com.example.quoteday.presentation.favoritefragment.FavoriteFragment
+import com.example.quoteday.presentation.homefragment.HomeFragment
 import com.example.quoteday.presentation.QuotesApplication
-import com.example.quoteday.presentation.QuotesFragment
+import com.example.quoteday.presentation.quotesfragment.QuotesFragment
 import dagger.BindsInstance
 import dagger.Component
 

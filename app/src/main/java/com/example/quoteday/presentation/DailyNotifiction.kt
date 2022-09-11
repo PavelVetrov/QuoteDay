@@ -16,14 +16,14 @@ const val CHANNEL = "channel"
 class DailyNotification : BroadcastReceiver() {
 
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Main + CoroutineName("my coroutine"))
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
 
     override fun onReceive(context: Context, intent: Intent) {
 
 
         coroutineScope.launch {
-             val dailyQuote = ApiFactory.apiService.getQuoteDay()
+            val dailyQuote = ApiFactory.apiService.getQuoteDay()
             if (dailyQuote.isSuccessful) {
                 dailyQuote.body()?.let {
                     try {

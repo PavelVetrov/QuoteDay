@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.adapter
+package com.example.quoteday.presentation.quotesfragment.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.quoteday.databinding.QuotesItemBinding
 import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.presentation.utils.QuotesFragmentDiffCallBack
 
 class QuotesFragmentAdapter :
     ListAdapter<QuotesItem, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()) {

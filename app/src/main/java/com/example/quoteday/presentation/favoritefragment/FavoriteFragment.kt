@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation
+package com.example.quoteday.presentation.favoritefragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quoteday.databinding.FragmentFavoriteBinding
 import com.example.quoteday.domain.model.QuotesItem
-import com.example.quoteday.presentation.adapter.QuotesFavoriteAdapter
-import com.example.quoteday.presentation.viewmodel.ViewModalFactory
-import com.example.quoteday.presentation.viewmodel.ViewModalFavoriteFragment
+import com.example.quoteday.presentation.QuotesApplication
+import com.example.quoteday.presentation.favoritefragment.adapter.QuotesFavoriteAdapter
+import com.example.quoteday.presentation.utils.ViewModalFactory
 import javax.inject.Inject
 
 

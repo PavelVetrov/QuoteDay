@@ -1,9 +1,9 @@
-package com.example.quoteday.presentation.viewmodel
+package com.example.quoteday.presentation.favoritefragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.domain.DeleteFavoriteQuoteUseCase
-import com.example.quoteday.domain.GetFavoriteQuotesDbUseCase
+import com.example.quoteday.domain.usecases.DeleteFavoriteQuoteUseCase
+import com.example.quoteday.domain.usecases.GetFavoriteQuotesDbUseCase
 import com.example.quoteday.domain.model.QuotesItem
 import kotlinx.coroutines.launch
 import javax.inject.Inject

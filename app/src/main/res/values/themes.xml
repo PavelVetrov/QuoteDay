@@ -14,4 +14,8 @@
         <item name="android:windowFullscreen">true</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ColorProgressBar">
+        <item name="colorAccent">@color/yellow</item>
+    </style>
 </resources>

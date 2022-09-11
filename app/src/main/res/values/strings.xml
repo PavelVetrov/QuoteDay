@@ -9,5 +9,8 @@
     <string name="delete_quote">delete quote</string>
     <string name="save_settings_button">Save Settings</string>
     <string name="daily_notifications">Daily notifications</string>
+    <string name="oops">Oops!</string>
+    <string name="your_internet_">Please check your internet settings and try again!</string>
+    <string name="try_again">Try again</string>
 
 </resources>

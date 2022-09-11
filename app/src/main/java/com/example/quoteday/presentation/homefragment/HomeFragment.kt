@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation
+package com.example.quoteday.presentation.homefragment
 
 import android.content.Context
 import android.content.Intent
@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentHomeBinding
 import com.example.quoteday.domain.model.QuotesItem
-import com.example.quoteday.presentation.viewmodel.ViewModalFactory
-import com.example.quoteday.presentation.viewmodel.ViewModalHomeFragment
+import com.example.quoteday.presentation.QuotesApplication
+import com.example.quoteday.presentation.utils.ViewModalFactory
 import javax.inject.Inject
 
 
@@ -22,6 +24,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ViewModalHomeFragment
+    private lateinit var progressBar: FrameLayout
+    private lateinit var errorHome: FrameLayout
 
     @Inject
     lateinit var viewModalFactory: ViewModalFactory
@@ -46,23 +50,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModalFactory)[ViewModalHomeFragment::class.java]
+        initLayout(view)
+        showProgressBar()
+        quotesObserve()
 
+
+    }
+
+    private fun quotesObserve() {
 
         viewModel.getQuoteDay()
+        viewModel.viewState.observe(viewLifecycleOwner) { viewState ->
+            if (viewState.isDownload) hideProgressBar()
+            else if (viewState.e != null) showException()
+        }
 
         viewModel.responseQuoteDay.observe(viewLifecycleOwner) { response ->
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    val gsonPars = it[0]
-                    binding.textQuote.text = gsonPars.q
-                    binding.textAuthor.text = gsonPars.a
-                    binding.progressBar.visibility = View.INVISIBLE
-                    clickFavoriteButton(gsonPars)
-                    clickShareButton(gsonPars)
-                }
-            } else binding.progressBar.visibility = View.VISIBLE
+
+            binding.textQuote.text = response.q
+            binding.textAuthor.text = response.a
+
+            clickFavoriteButton(response)
+            clickShareButton(response)
+
 
         }
+    }
+
+    private fun initLayout(view: View) {
+        progressBar = view.findViewById(R.id.loading_home_layout)
+        errorHome = view.findViewById(R.id.error_home_layout)
+
     }
 
     private fun clickFavoriteButton(quotesItem: QuotesItem) {
@@ -92,6 +110,23 @@ class HomeFragment : Fragment() {
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }
+    }
+
+    private fun showException() {
+        errorHome.visibility = View.VISIBLE
+        binding.errorHomeLayout.buttonTry.setOnClickListener {
+            viewModel.getQuoteDay()
+            errorHome.visibility = View.INVISIBLE
+        }
+
+    }
+
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.INVISIBLE
     }
 
     override fun onDestroyView() {

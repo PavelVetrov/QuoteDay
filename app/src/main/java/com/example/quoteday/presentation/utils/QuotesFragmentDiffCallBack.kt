@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.adapter
+package com.example.quoteday.presentation.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.quoteday.domain.model.QuotesItem
