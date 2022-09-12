@@ -4,27 +4,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentHomeBinding
 import com.example.quoteday.domain.model.QuotesItem
 import com.example.quoteday.presentation.QuotesApplication
+import com.example.quoteday.presentation.utils.BaseFragment
 import com.example.quoteday.presentation.utils.ViewModalFactory
 import javax.inject.Inject
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
     private lateinit var viewModel: ViewModalHomeFragment
-    private lateinit var progressBar: FrameLayout
-    private lateinit var errorHome: FrameLayout
+    private var progressBar: FrameLayout? = null
+    private var errorHome: FrameLayout? = null
 
     @Inject
     lateinit var viewModalFactory: ViewModalFactory
@@ -35,13 +31,7 @@ class HomeFragment : Fragment() {
         component.inject(this)
         super.onAttach(context)
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModalFactory)[ViewModalHomeFragment::class.java]
@@ -89,20 +79,21 @@ class HomeFragment : Fragment() {
         }
     }
     private fun showException() {
-        errorHome.visibility = View.VISIBLE
+        errorHome?.visibility = View.VISIBLE
         binding.errorHomeLayout.buttonTry.setOnClickListener {
             viewModel.getQuoteDay()
-            errorHome.visibility = View.INVISIBLE
+            errorHome?.visibility = View.INVISIBLE
         }
     }
     private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        progressBar?.visibility = View.VISIBLE
     }
     private fun hideProgressBar() {
-        progressBar.visibility = View.INVISIBLE
+        progressBar?.visibility = View.INVISIBLE
     }
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        errorHome = null
+        progressBar = null
     }
 }

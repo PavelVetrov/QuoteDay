@@ -2,23 +2,19 @@ package com.example.quoteday.presentation.favoritefragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quoteday.databinding.FragmentFavoriteBinding
 import com.example.quoteday.domain.model.QuotesItem
 import com.example.quoteday.presentation.QuotesApplication
 import com.example.quoteday.presentation.favoritefragment.adapter.QuotesFavoriteAdapter
+import com.example.quoteday.presentation.utils.BaseFragment
 import com.example.quoteday.presentation.utils.ViewModalFactory
 import javax.inject.Inject
 
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate) {
 
-    private var _binding: FragmentFavoriteBinding? = null
-    private val binding get() = _binding!!
     private lateinit var viewModal: ViewModalFavoriteFragment
     private lateinit var viewAdapterFavoriteQuotes: QuotesFavoriteAdapter
 
@@ -31,19 +27,11 @@ class FavoriteFragment : Fragment() {
         component.inject(this)
         super.onAttach(context)
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModal = ViewModelProvider(this, viewModalFactory)[ViewModalFavoriteFragment::class.java]
         initRecycleView()
         observeFavoriteQuotes()
-
     }
     private fun observeFavoriteQuotes(){
         viewModal.favoriteQuotes.observe(viewLifecycleOwner) {
@@ -60,9 +48,5 @@ class FavoriteFragment : Fragment() {
                     viewModal.deleteQuotes(quotesItem)
                 }
             }
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

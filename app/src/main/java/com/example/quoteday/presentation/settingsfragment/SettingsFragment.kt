@@ -10,33 +10,22 @@ import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentSettingsBinding
 import com.example.quoteday.presentation.CHANNEL
 import com.example.quoteday.presentation.DailyNotification
 import com.example.quoteday.presentation.NOTIFICATION_ID
+import com.example.quoteday.presentation.utils.BaseFragment
 import java.util.*
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
 
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
     private lateinit var preferences: SharedPreferences
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferences = requireActivity().getSharedPreferences(PREFERENCES_APP, MODE_PRIVATE)
@@ -45,7 +34,8 @@ class SettingsFragment : Fragment() {
         createNotificationChannel()
         behaviourSwitch()
     }
-    private fun saveSettings(){
+
+    private fun saveSettings() {
         binding.buttonSaveSettings.setOnClickListener {
             val hourSave = binding.timePicker.hour
             val minuteSave = binding.timePicker.minute
@@ -54,7 +44,8 @@ class SettingsFragment : Fragment() {
             scheduleNotification()
         }
     }
-    private fun behaviourSwitch(){
+
+    private fun behaviourSwitch() {
         binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 preferences.edit().putBoolean(STATE_SWITCH, true).apply()
@@ -70,6 +61,7 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+
     private fun scheduleNotification() {
         val intent = Intent(requireContext(), DailyNotification::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
@@ -89,6 +81,7 @@ class SettingsFragment : Fragment() {
         )
         showAlert(time)
     }
+
     private fun scheduleNotificationCancel() {
         val intent = Intent(requireContext(), DailyNotification::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
@@ -103,18 +96,21 @@ class SettingsFragment : Fragment() {
             pendingIntent
         )
     }
+
     private fun showAlert(time: Long) {
         val date = Date(time)
         val timeFormat =
             android.text.format.DateFormat.getTimeFormat(requireContext())
         AlertDialog.Builder(requireActivity())
             .setTitle(getString(R.string.notification_scheduled))
-            .setMessage(getString(R.string.message) +
-                       "\n" + getString(R.string.scheduled) + timeFormat.format(date)
+            .setMessage(
+                getString(R.string.message) +
+                        "\n" + getString(R.string.scheduled) + timeFormat.format(date)
             )
             .setPositiveButton(getString(R.string.okay)) { _, _ -> }
             .show()
     }
+
     private fun getTime(): Long {
         val currentMinute = preferences.getInt(TIME_MINUTE, DEFAULT_TIME)
         val currentHour = preferences.getInt(TIME_HOUR, DEFAULT_TIME)
@@ -125,6 +121,7 @@ class SettingsFragment : Fragment() {
         calendar.set(year, month, day, currentHour, currentMinute)
         return calendar.timeInMillis
     }
+
     private fun createNotificationChannel() {
         val name = getString(R.string.notification_channel)
         val desc = getString(R.string.description_channel)
@@ -135,6 +132,7 @@ class SettingsFragment : Fragment() {
             requireActivity().getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
+
     private fun defaultValues() {
         val calendar = Calendar.getInstance()
         val hourTime = calendar.get(Calendar.HOUR)
@@ -151,15 +149,12 @@ class SettingsFragment : Fragment() {
             binding.buttonSaveSettings.isEnabled = false
         }
     }
+
     companion object {
         private const val DEFAULT_TIME = 1
         private const val STATE_SWITCH = "state switch"
         private const val PREFERENCES_APP = "preferences"
         private const val TIME_HOUR = "time hour"
         private const val TIME_MINUTE = "time minute"
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

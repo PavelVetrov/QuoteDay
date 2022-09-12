@@ -9,7 +9,7 @@ import com.example.quoteday.domain.model.QuotesItem
 import com.example.quoteday.presentation.utils.QuotesFragmentDiffCallBack
 
 class QuotesFragmentAdapter :
-    ListAdapter<QuotesItem, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()) {
+    ListAdapter<QuotesItem, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()){
 
     var onClickListenerSaveFavorite: OnClickListenerSaveFavorite? = null
     var onClickListenerShareQuote: OnClickListenerShareQuote? = null
@@ -24,19 +24,24 @@ class QuotesFragmentAdapter :
     }
     override fun onBindViewHolder(holder: QuoteFragmentViewHolder, position: Int) {
         val quotes = getItem(position)
-        holder.binding.quotesText.text = quotes.quotes
-        holder.binding.quoteAuthor.text = quotes.author
-        holder.binding.buttonSave.setOnClickListener {
-            holder.binding.buttonSave.animate().apply {
-                duration = 1000
-                rotationY(360f)
-            }.start()
+        with(holder.binding){
+            buttonSave.tag = quotes
+            shareButton.tag = quotes
 
-            holder.binding.buttonSave.setColorFilter(Color.RED)
-            onClickListenerSaveFavorite?.onClickSaveFavorite(quotes)
-        }
-        holder.binding.shareButton.setOnClickListener {
-            onClickListenerShareQuote?.onClickShare(quotes)
+            quotesText.text = quotes.quotes
+            quoteAuthor.text = quotes.author
+            buttonSave.setOnClickListener {
+                buttonSave.animate().apply {
+                    duration = 1000
+                    rotationY(360f)
+                }.start()
+
+                buttonSave.setColorFilter(Color.RED)
+                onClickListenerSaveFavorite?.onClickSaveFavorite(quotes)
+            }
+            shareButton.setOnClickListener {
+                onClickListenerShareQuote?.onClickShare(quotes)
+            }
         }
     }
     interface OnClickListenerSaveFavorite {
@@ -46,5 +51,6 @@ class QuotesFragmentAdapter :
     interface OnClickListenerShareQuote {
         fun onClickShare(quotesItem: QuotesItem)
     }
+
 }
 

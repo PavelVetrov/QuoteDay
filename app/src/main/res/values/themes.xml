@@ -18,4 +18,10 @@
     <style name="ColorProgressBar">
         <item name="colorAccent">@color/yellow</item>
     </style>
+    <style name="Theme.QuoteDay.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.QuoteDay.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.QuoteDay.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
