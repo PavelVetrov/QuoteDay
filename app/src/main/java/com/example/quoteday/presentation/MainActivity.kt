@@ -17,19 +17,14 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-
     private lateinit var navController: NavController
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
          navController = navHostFragment.navController
-
         val appConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,
@@ -39,10 +34,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appConfiguration)
-
         findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             .setupWithNavController(navController)
-
     }
-
 }

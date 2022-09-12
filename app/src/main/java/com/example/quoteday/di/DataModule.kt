@@ -22,8 +22,5 @@ interface DataModule {
         fun providerQuotesItem(application: Application): QuotesItemDao{
             return AppDataBase.getInstance(application).quotesItemDao()
         }
-
-
-
     }
 }

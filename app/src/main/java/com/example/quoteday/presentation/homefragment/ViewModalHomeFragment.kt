@@ -23,10 +23,8 @@ class ViewModalHomeFragment @Inject constructor(
     private val errorHandler = CoroutineExceptionHandler { _, error ->
         _viewStateHome.value = ViewState(e = error)
     }
-
     private val _viewStateHome = MutableLiveData<ViewState>()
     val viewState: LiveData<ViewState> = _viewStateHome
-
 
     private val _responseQuoteDay = MutableLiveData<QuotesItem>()
     val responseQuoteDay: LiveData<QuotesItem> = _responseQuoteDay
@@ -36,10 +34,8 @@ class ViewModalHomeFragment @Inject constructor(
             addFavoriteQuoteUseCase.invoke(quotesItem)
         }
     }
-
     fun getQuoteDay() {
         viewModelScope.launch(errorHandler) {
-
             val response = getQuoteDayDtoUseCase.invoke()
             if (response.isSuccessful){
                 response.body()?.let {
@@ -51,6 +47,5 @@ class ViewModalHomeFragment @Inject constructor(
 
         }
     }
-
 }
 

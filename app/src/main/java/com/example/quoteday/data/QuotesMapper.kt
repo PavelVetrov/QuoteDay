@@ -6,26 +6,17 @@ import javax.inject.Inject
 
 class QuotesMapper @Inject constructor() {
 
-
     private fun mapDbModalToEntity(dbModal: QuotesItemDbModal) = QuotesItem(
-        a = dbModal.author,
-        q = dbModal.quotes,
-        c = dbModal.id
-
-
+        author = dbModal.author,
+        quotes = dbModal.quotes,
+        id = dbModal.id
     )
-
     fun mapEntityToDbModal(quotesItem: QuotesItem) = QuotesItemDbModal(
-
-            id = quotesItem.c,
-            quotes = quotesItem.q,
-            author = quotesItem.a
-
-
+            id = quotesItem.id,
+            quotes = quotesItem.quotes,
+            author = quotesItem.author
     )
-
     fun mapListDbModalToEntity(list: List<QuotesItemDbModal>) = list.map {
-
         mapDbModalToEntity(it)
     }
 }

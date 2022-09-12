@@ -1,7 +1,12 @@
 package com.example.quoteday.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class QuotesItem(
-    val a: String,
-    val q: String,
-    var c: Int,
-    )
+    @SerializedName("a")
+    val author: String,
+    @SerializedName("q")
+    val quotes: String,
+    @SerializedName("c")
+    var id: Int,
+)

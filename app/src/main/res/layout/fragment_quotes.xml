@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_quotes"
             android:layout_width="match_parent"
@@ -24,19 +22,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/quotes_item" />
-
-
     </LinearLayout>
-
     <include
         android:id="@+id/loading_quotes_layout"
         layout="@layout/loading_layout"
         android:visibility="invisible" />
-
     <include
         android:id="@+id/error_quotes_layout"
         layout="@layout/error_layout"
         android:visibility="invisible" />
-
-
 </FrameLayout>

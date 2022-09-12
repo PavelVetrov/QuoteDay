@@ -16,5 +16,4 @@ interface RepositoryQuotes {
     suspend fun deleteFavoriteQuote(quotesItem: QuotesItem)
 
     suspend fun addFavoriteQuote(quotesItem: QuotesItem)
-
 }

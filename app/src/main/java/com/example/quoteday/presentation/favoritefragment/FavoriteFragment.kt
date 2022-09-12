@@ -24,16 +24,13 @@ class FavoriteFragment : Fragment() {
 
     @Inject
     lateinit var viewModalFactory: ViewModalFactory
-
     private val component by lazy {
         (requireActivity().application as QuotesApplication).component
     }
-
     override fun onAttach(context: Context) {
         component.inject(this)
         super.onAttach(context)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,28 +38,22 @@ class FavoriteFragment : Fragment() {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModal = ViewModelProvider(this, viewModalFactory)[ViewModalFavoriteFragment::class.java]
-
         initRecycleView()
-
-        viewModal.favoriteQuotes.observe(viewLifecycleOwner) {
-            viewAdapterFavoriteQuotes.submitList(it)
-
-        }
+        observeFavoriteQuotes()
 
     }
-
+    private fun observeFavoriteQuotes(){
+        viewModal.favoriteQuotes.observe(viewLifecycleOwner) {
+            viewAdapterFavoriteQuotes.submitList(it)
+        }
+    }
     private fun initRecycleView() {
-
         val rvAdapter = binding.rvFavoriteQuotes
         viewAdapterFavoriteQuotes = QuotesFavoriteAdapter()
-
         rvAdapter.adapter = viewAdapterFavoriteQuotes
-
         viewAdapterFavoriteQuotes.onClickListenerDeleteQuote =
             object : QuotesFavoriteAdapter.OnClickListenerDeleteQuote {
                 override fun onClickDeleteQuote(quotesItem: QuotesItem) {
@@ -70,10 +61,8 @@ class FavoriteFragment : Fragment() {
                 }
             }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 }

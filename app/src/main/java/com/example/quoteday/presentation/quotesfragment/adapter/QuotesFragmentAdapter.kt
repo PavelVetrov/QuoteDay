@@ -22,11 +22,10 @@ class QuotesFragmentAdapter :
         )
         return QuoteFragmentViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: QuoteFragmentViewHolder, position: Int) {
         val quotes = getItem(position)
-        holder.binding.quotesText.text = quotes.q
-        holder.binding.quoteAuthor.text = quotes.a
+        holder.binding.quotesText.text = quotes.quotes
+        holder.binding.quoteAuthor.text = quotes.author
         holder.binding.buttonSave.setOnClickListener {
             holder.binding.buttonSave.animate().apply {
                 duration = 1000
@@ -34,28 +33,18 @@ class QuotesFragmentAdapter :
             }.start()
 
             holder.binding.buttonSave.setColorFilter(Color.RED)
-
             onClickListenerSaveFavorite?.onClickSaveFavorite(quotes)
-
         }
         holder.binding.shareButton.setOnClickListener {
-
             onClickListenerShareQuote?.onClickShare(quotes)
         }
-
     }
-
     interface OnClickListenerSaveFavorite {
-
         fun onClickSaveFavorite(quotesItem: QuotesItem)
-
     }
 
     interface OnClickListenerShareQuote {
-
         fun onClickShare(quotesItem: QuotesItem)
     }
-
-
 }
 

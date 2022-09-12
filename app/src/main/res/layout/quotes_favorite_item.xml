@@ -9,11 +9,9 @@
     app:cardCornerRadius="@dimen/radius_20"
     android:orientation="vertical">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:id="@+id/quotes_favorite_text"
             android:layout_width="0dp"
@@ -27,8 +25,6 @@
             app:layout_constraintEnd_toStartOf="@+id/bottom_delete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
         <ImageView
             android:id="@+id/bottom_delete"
             android:layout_width="wrap_content"
@@ -40,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/delete_quote"/>
-
         <TextView
             android:id="@+id/quote_favorite_author"
             android:layout_width="wrap_content"
@@ -53,9 +48,7 @@
             app:layout_constraintStart_toStartOf="@+id/quotes_favorite_text"
             app:layout_constraintTop_toBottomOf="@+id/quotes_favorite_text" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.cardview.widget.CardView>
 

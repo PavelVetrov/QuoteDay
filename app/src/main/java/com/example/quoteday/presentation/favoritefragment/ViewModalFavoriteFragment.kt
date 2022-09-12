@@ -13,7 +13,6 @@ class ViewModalFavoriteFragment @Inject constructor(
     private val deleteFavoriteQuoteUseCase: DeleteFavoriteQuoteUseCase
 ) : ViewModel() {
 
-
     val favoriteQuotes = favoriteQuotesDbUseCase.invoke()
 
     fun deleteQuotes(quotesItem: QuotesItem) {

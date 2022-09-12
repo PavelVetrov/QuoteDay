@@ -22,19 +22,14 @@ class ViewModalQuotesFragment @Inject constructor(
     private val errorHandler = CoroutineExceptionHandler { _, error ->
         _viewStateQuotes.value = ViewState(e = error)
     }
-
     private val _viewStateQuotes = MutableLiveData<ViewState>()
     val viewStateQuotes: LiveData<ViewState> = _viewStateQuotes
-
 
     private val _getQuotesList = MutableLiveData<Quotes>()
     val getQuotesList: LiveData<Quotes> = _getQuotesList
 
     fun getQuotesList() {
-
         viewModelScope.launch(errorHandler) {
-
-
             val quotesList = getQuotesListDto.invoke()
             if (quotesList.isSuccessful) {
                 quotesList.body()?.let {
@@ -42,14 +37,11 @@ class ViewModalQuotesFragment @Inject constructor(
                     _viewStateQuotes.value = ViewState(true)
                 }
             }
-
         }
     }
-
     fun addFavoriteQuote(quotesItem: QuotesItem) {
         viewModelScope.launch {
             addFavoriteQuoteUseCase.invoke(quotesItem)
         }
     }
-
 }

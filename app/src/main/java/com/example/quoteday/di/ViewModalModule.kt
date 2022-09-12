@@ -24,5 +24,4 @@ interface ViewModalModule {
     @IntoMap
     @ViewModalKey(ViewModalQuotesFragment::class)
     fun bindViewModalQuotesFragment(viewModal: ViewModalQuotesFragment): ViewModel
-
 }

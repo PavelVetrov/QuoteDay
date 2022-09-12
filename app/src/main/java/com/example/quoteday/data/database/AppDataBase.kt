@@ -27,7 +27,6 @@ abstract class AppDataBase : RoomDatabase() {
                 INSTANCE = db
                 return db
             }
-
         }
     }
 }

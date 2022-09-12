@@ -18,22 +18,17 @@ class RepositoryQuotesImpl @Inject constructor(
     override suspend fun getQuotesListDto(): Response<Quotes> {
         return ApiFactory.apiService.getQuoteList()
     }
-
     override suspend fun getQuoteDayDto(): Response<Quotes> {
         return ApiFactory.apiService.getQuoteDay()
     }
-
     override fun getFavoriteQuotesDb(): LiveData<List<QuotesItem>> =
         Transformations.map(quotesDao.getQuotesList()) {
             mapper.mapListDbModalToEntity(it)
         }
-
     override suspend fun deleteFavoriteQuote(quotesItem: QuotesItem) {
-        quotesDao.deleteQuote(quotesItem.c)
+        quotesDao.deleteQuote(quotesItem.id)
     }
-
     override suspend fun addFavoriteQuote(quotesItem: QuotesItem) {
         quotesDao.addFavoriteQuote(mapper.mapEntityToDbModal(quotesItem))
     }
-
 }

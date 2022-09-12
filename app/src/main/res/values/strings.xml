@@ -12,5 +12,18 @@
     <string name="oops">Oops!</string>
     <string name="your_internet_">Please check your internet settings and try again!</string>
     <string name="try_again">Try again</string>
+    <string name="notification_scheduled">Notification Scheduled</string>
+    <string name="okay">Okay</string>
+    <string name="main">Main</string>
+    <string name="favorite">Favorite</string>
+    <string name="quotes">Quotes</string>
+    <string name="settings">Settings</string>
+    <string name="notification_channel">Notification Channel</string>
+    <string name="description_channel">A Description of the Channel</string>
+    <string name="notification_disabled">Notifications disabled</string>
+    <string name="message">\nMessage: Daily notifications </string>
+    <string name="scheduled">scheduled at: </string>
+    <string name="text_plain">text/plain</string>
+
 
 </resources>

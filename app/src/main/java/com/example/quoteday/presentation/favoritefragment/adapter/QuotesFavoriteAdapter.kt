@@ -17,18 +17,15 @@ class QuotesFavoriteAdapter :
             QuotesFavoriteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return QuotesFavoriteViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: QuotesFavoriteViewHolder, position: Int) {
         val getQuote = getItem(position)
-        holder.binding.quotesFavoriteText.text = getQuote.q
-        holder.binding.quoteFavoriteAuthor.text = getQuote.a
+        holder.binding.quotesFavoriteText.text = getQuote.quotes
+        holder.binding.quoteFavoriteAuthor.text = getQuote.author
         holder.binding.bottomDelete.setOnClickListener {
 
             onClickListenerDeleteQuote?.onClickDeleteQuote(getQuote)
         }
-
     }
-
     interface OnClickListenerDeleteQuote {
 
         fun onClickDeleteQuote(quotesItem: QuotesItem)

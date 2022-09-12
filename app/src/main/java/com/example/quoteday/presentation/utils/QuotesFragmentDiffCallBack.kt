@@ -6,9 +6,8 @@ import com.example.quoteday.domain.model.QuotesItem
 class QuotesFragmentDiffCallBack : DiffUtil.ItemCallback<QuotesItem>() {
 
     override fun areItemsTheSame(oldItem: QuotesItem, newItem: QuotesItem): Boolean {
-        return oldItem.c == newItem.c
+        return oldItem.id == newItem.id
     }
-
     override fun areContentsTheSame(oldItem: QuotesItem, newItem: QuotesItem): Boolean {
         return oldItem == newItem
     }

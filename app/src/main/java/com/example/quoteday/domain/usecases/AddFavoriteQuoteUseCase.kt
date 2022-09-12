@@ -7,7 +7,6 @@ import javax.inject.Inject
 class AddFavoriteQuoteUseCase @Inject constructor(
     private val repositoryQuotes: RepositoryQuotes
 ) {
-
     suspend operator fun invoke(quotesItem: QuotesItem) =
         repositoryQuotes.addFavoriteQuote(quotesItem)
 }

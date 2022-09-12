@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.quotesfragment.QuotesFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_quotes"
         android:layout_width="match_parent"

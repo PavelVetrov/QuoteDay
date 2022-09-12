@@ -5,11 +5,14 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
-
-    @GET("quotes")
+    @GET(QUOTES_ITEM)
     suspend fun getQuoteList(): Response<Quotes>
-
-    @GET("today")
+    @GET(DAILY_QUOTES)
     suspend fun getQuoteDay(): Response<Quotes>
+
+    companion object {
+        private const val QUOTES_ITEM = "quotes"
+        private const val DAILY_QUOTES = "today"
+    }
 
 }
