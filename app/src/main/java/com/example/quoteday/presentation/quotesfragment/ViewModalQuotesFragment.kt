@@ -9,11 +9,12 @@ import com.example.quoteday.domain.model.QuotesItem
 import com.example.quoteday.domain.usecases.AddFavoriteQuoteUseCase
 import com.example.quoteday.domain.usecases.GetQuotesListDtoUseCase
 import com.example.quoteday.presentation.ViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ViewModalQuotesFragment @Inject constructor(
     private val addFavoriteQuoteUseCase: AddFavoriteQuoteUseCase,
     private val getQuotesListDto: GetQuotesListDtoUseCase

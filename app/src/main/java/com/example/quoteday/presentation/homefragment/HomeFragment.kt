@@ -1,40 +1,26 @@
 package com.example.quoteday.presentation.homefragment
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentHomeBinding
 import com.example.quoteday.domain.model.QuotesItem
-import com.example.quoteday.presentation.QuotesApplication
 import com.example.quoteday.presentation.utils.BaseFragment
-import com.example.quoteday.presentation.utils.ViewModalFactory
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private lateinit var viewModel: ViewModalHomeFragment
+    private val viewModel by viewModels<ViewModalHomeFragment>()
     private var progressBar: FrameLayout? = null
     private var errorHome: FrameLayout? = null
 
-    @Inject
-    lateinit var viewModalFactory: ViewModalFactory
-    private val component by lazy {
-        (requireActivity().application as QuotesApplication).component
-    }
-    override fun onAttach(context: Context) {
-        component.inject(this)
-        super.onAttach(context)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModalFactory)[ViewModalHomeFragment::class.java]
         initLayout(view)
         showProgressBar()
         quotesObserve()

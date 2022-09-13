@@ -4,17 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuotesItem
 import com.example.quoteday.domain.usecases.AddFavoriteQuoteUseCase
 import com.example.quoteday.domain.usecases.GetQuoteDayDtoUseCase
 import com.example.quoteday.presentation.ViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import javax.inject.Inject
 
+@HiltViewModel
 class ViewModalHomeFragment @Inject constructor(
     private val getQuoteDayDtoUseCase: GetQuoteDayDtoUseCase,
     private val addFavoriteQuoteUseCase: AddFavoriteQuoteUseCase
