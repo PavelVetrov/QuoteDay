@@ -8,14 +8,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.quoteday.R
-import com.example.quoteday.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +30,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.settingsFragment
             )
         )
-        setupActionBarWithNavController(navController, appConfiguration)
-        findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-            .setupWithNavController(navController)
+        navController?.let { navController ->
+            setupActionBarWithNavController(navController, appConfiguration)
+            findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                .setupWithNavController(navController)
+        }
+
     }
 }
