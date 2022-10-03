@@ -1,14 +1,14 @@
-package com.example.quoteday.presentation.favoritefragment.adapter
+package com.example.quoteday.presentation.favorite.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.quoteday.databinding.QuotesFavoriteItemBinding
-import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.presentation.utils.QuotesFragmentDiffCallBack
 
 class QuotesFavoriteAdapter :
-    ListAdapter<QuotesItem, QuotesFavoriteViewHolder>(QuotesFragmentDiffCallBack()) {
+    ListAdapter<QuoteModel, QuotesFavoriteViewHolder>(QuotesFragmentDiffCallBack()) {
 
     var onClickListenerDeleteQuote: OnClickListenerDeleteQuote? = null
 
@@ -21,7 +21,7 @@ class QuotesFavoriteAdapter :
     override fun onBindViewHolder(holder: QuotesFavoriteViewHolder, position: Int) {
         val getQuote = getItem(position)
         with(holder.binding) {
-            quotesFavoriteText.text = getQuote.quotes
+            quotesFavoriteText.text = getQuote.quote
             quoteFavoriteAuthor.text = getQuote.author
             bottomDelete.setOnClickListener {
                 onClickListenerDeleteQuote?.onClickDeleteQuote(getQuote)
@@ -31,6 +31,6 @@ class QuotesFavoriteAdapter :
 
     interface OnClickListenerDeleteQuote {
 
-        fun onClickDeleteQuote(quotesItem: QuotesItem)
+        fun onClickDeleteQuote(quoteModel: QuoteModel)
     }
 }

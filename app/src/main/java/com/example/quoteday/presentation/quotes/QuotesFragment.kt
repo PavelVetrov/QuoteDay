@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.quotesfragment
+package com.example.quoteday.presentation.quotes
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,15 +7,15 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentQuotesBinding
-import com.example.quoteday.domain.model.QuotesItem
-import com.example.quoteday.presentation.quotesfragment.adapter.QuotesFragmentAdapter
+import com.example.quoteday.domain.model.QuoteModel
+import com.example.quoteday.presentation.quotes.adapter.QuotesFragmentAdapter
 import com.example.quoteday.presentation.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding::inflate) {
 
-    private val viewModel by viewModels<ViewModalQuotesFragment>()
+    private val viewModel by viewModels<QuotesViewModal>()
     private var viewAdapterQuotes: QuotesFragmentAdapter? = null
     private var progressBar: FrameLayout? = null
     private var errorQuotes: FrameLayout? = null
@@ -31,8 +31,10 @@ class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding
     private fun observeQuotes() {
         viewModel.getQuotesList()
         viewModel.viewStateQuotes.observe(viewLifecycleOwner) { viewState ->
-            if (viewState.isDownload) hideProgressBar()
-            else if (viewState.e != null) showException()
+            when{
+                viewState.isDownload -> hideProgressBar()
+                viewState.error != null -> showException()
+            }
         }
         viewModel.getQuotesList.observe(viewLifecycleOwner) { response ->
             viewAdapterQuotes?.submitList(response)
@@ -45,14 +47,14 @@ class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding
         viewAdapter.adapter = viewAdapterQuotes
         viewAdapterQuotes?.onClickListenerSaveFavorite =
             object : QuotesFragmentAdapter.OnClickListenerSaveFavorite {
-                override fun onClickSaveFavorite(quotesItem: QuotesItem) {
-                    viewModel.addFavoriteQuote(quotesItem)
+                override fun onClickSaveFavorite(quoteModel: QuoteModel) {
+                    viewModel.addFavoriteQuote(quoteModel)
                 }
             }
         viewAdapterQuotes?.onClickListenerShareQuote =
             object : QuotesFragmentAdapter.OnClickListenerShareQuote {
-                override fun onClickShare(quotesItem: QuotesItem) {
-                    val message = quotesItem.quotes
+                override fun onClickShare(quoteModel: QuoteModel) {
+                    val message = quoteModel.quote
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
                         putExtra(Intent.EXTRA_TEXT, message)

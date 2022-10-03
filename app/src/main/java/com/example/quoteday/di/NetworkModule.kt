@@ -23,7 +23,6 @@ class NetworkModule {
     }
 
     companion object {
-
         private const val BASE_URL = "https://zenquotes.io/api/"
     }
 }

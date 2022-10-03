@@ -1,22 +1,23 @@
 package com.example.quoteday.data
 
-import com.example.quoteday.data.database.QuotesItemDbModal
-import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.data.database.QuotesItemEntity
+import com.example.quoteday.domain.model.QuoteModel
 import javax.inject.Inject
 
 class QuotesMapper @Inject constructor() {
 
-    private fun mapDbModalToEntity(dbModal: QuotesItemDbModal) = QuotesItem(
+    private fun mapDbModalToEntity(dbModal: QuotesItemEntity) = QuoteModel(
         author = dbModal.author,
-        quotes = dbModal.quotes,
+        quote = dbModal.quotes,
         id = dbModal.id
     )
-    fun mapEntityToDbModal(quotesItem: QuotesItem) = QuotesItemDbModal(
-            id = quotesItem.id,
-            quotes = quotesItem.quotes,
-            author = quotesItem.author
+
+    fun mapEntityToDbModal(quoteModel: QuoteModel) = QuotesItemEntity(
+        quotes = quoteModel.quote,
+        author = quoteModel.author
     )
-    fun mapListDbModalToEntity(list: List<QuotesItemDbModal>) = list.map {
+
+    fun mapListDbModalToEntity(list: List<QuotesItemEntity>) = list.map {
         mapDbModalToEntity(it)
     }
 }

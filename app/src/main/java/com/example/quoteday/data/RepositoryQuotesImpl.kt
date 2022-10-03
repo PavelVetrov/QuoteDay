@@ -2,34 +2,40 @@ package com.example.quoteday.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.quoteday.data.database.QuotesItemDao
+import com.example.quoteday.data.database.QuotesDao
 import com.example.quoteday.data.network.QuotesApi
 import com.example.quoteday.domain.RepositoryQuotes
+import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.domain.model.Quotes
-import com.example.quoteday.domain.model.QuotesItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
 class RepositoryQuotesImpl @Inject constructor(
     private val mapper: QuotesMapper,
-    private val quotesDao: QuotesItemDao,
+    private val quotesDao: QuotesDao,
     private val quotesApi: QuotesApi
 ) : RepositoryQuotes {
 
-    override suspend fun getQuotesListDto(): Response<Quotes> {
-        return quotesApi.getQuoteList()
+    override suspend fun getQuotes(): Response<Quotes> = withContext(Dispatchers.IO) {
+        quotesApi.getQuoteList()
     }
-    override suspend fun getQuoteDayDto(): Response<Quotes> {
-        return quotesApi.getQuoteDay()
+
+    override suspend fun requestQuoteDay(): Response<Quotes> = withContext(Dispatchers.IO) {
+        quotesApi.getQuoteDay()
     }
-    override fun getFavoriteQuotesDb(): LiveData<List<QuotesItem>> =
+
+    override fun getFavoriteQuotes(): LiveData<List<QuoteModel>> =
         Transformations.map(quotesDao.getQuotesList()) {
             mapper.mapListDbModalToEntity(it)
         }
-    override suspend fun deleteFavoriteQuote(quotesItem: QuotesItem) {
-        quotesDao.deleteQuote(quotesItem.id)
+
+    override suspend fun deleteFavoriteQuote(quoteModel: QuoteModel) {
+        quotesDao.deleteQuote(quoteModel.id)
     }
-    override suspend fun addFavoriteQuote(quotesItem: QuotesItem) {
-        quotesDao.addFavoriteQuote(mapper.mapEntityToDbModal(quotesItem))
+
+    override suspend fun addFavoriteQuote(quoteModel: QuoteModel) {
+        quotesDao.addFavoriteQuote(mapper.mapEntityToDbModal(quoteModel))
     }
 }

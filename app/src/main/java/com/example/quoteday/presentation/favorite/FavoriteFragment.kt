@@ -1,18 +1,18 @@
-package com.example.quoteday.presentation.favoritefragment
+package com.example.quoteday.presentation.favorite
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.quoteday.databinding.FragmentFavoriteBinding
-import com.example.quoteday.domain.model.QuotesItem
-import com.example.quoteday.presentation.favoritefragment.adapter.QuotesFavoriteAdapter
+import com.example.quoteday.domain.model.QuoteModel
+import com.example.quoteday.presentation.favorite.adapter.QuotesFavoriteAdapter
 import com.example.quoteday.presentation.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate) {
 
-    private val viewModal by viewModels<ViewModalFavoriteFragment>()
+    private val viewModal by viewModels<FavoriteQuotesViewModal>()
     private var viewAdapterFavoriteQuotes: QuotesFavoriteAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,8 +31,8 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
         rvAdapter.adapter = viewAdapterFavoriteQuotes
         viewAdapterFavoriteQuotes?.onClickListenerDeleteQuote =
             object : QuotesFavoriteAdapter.OnClickListenerDeleteQuote {
-                override fun onClickDeleteQuote(quotesItem: QuotesItem) {
-                    viewModal.deleteQuotes(quotesItem)
+                override fun onClickDeleteQuote(quoteModel: QuoteModel) {
+                    viewModal.deleteQuotes(quoteModel)
                 }
             }
     }

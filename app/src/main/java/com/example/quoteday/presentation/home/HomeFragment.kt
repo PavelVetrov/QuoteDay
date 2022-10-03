@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.homefragment
+package com.example.quoteday.presentation.home
 
 import android.content.Intent
 import android.graphics.Color
@@ -8,14 +8,14 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentHomeBinding
-import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.presentation.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private val viewModel by viewModels<ViewModalHomeFragment>()
+    private val viewModel by viewModels<HomeQuoteViewModal>()
     private var progressBar: FrameLayout? = null
     private var errorHome: FrameLayout? = null
 
@@ -28,11 +28,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun quotesObserve() {
         viewModel.getQuoteDay()
         viewModel.viewState.observe(viewLifecycleOwner) { viewState ->
-            if (viewState.isDownload) hideProgressBar()
-            else if (viewState.e != null) showException()
+            when {
+                viewState.isDownload -> hideProgressBar()
+                viewState.error != null -> showException()
+            }
+
         }
         viewModel.responseQuoteDay.observe(viewLifecycleOwner) { response ->
-            binding.textQuote.text = response.quotes
+            binding.textQuote.text = response.quote
             binding.textAuthor.text = response.author
             clickFavoriteButton(response)
             clickShareButton(response)
@@ -42,9 +45,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         progressBar = view.findViewById(R.id.loading_home_layout)
         errorHome = view.findViewById(R.id.error_home_layout)
     }
-    private fun clickFavoriteButton(quotesItem: QuotesItem) {
+    private fun clickFavoriteButton(quoteModel: QuoteModel) {
         binding.buttonFavorite.setOnClickListener {
-            viewModel.addFavoriteQuote(quotesItem)
+            viewModel.addFavoriteQuote(quoteModel)
             binding.buttonFavorite.animate().apply {
                 duration = 1000
                 rotationY(360f)
@@ -52,9 +55,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             binding.buttonFavorite.setColorFilter(Color.RED)
         }
     }
-    private fun clickShareButton(quotesItem: QuotesItem) {
+    private fun clickShareButton(quoteModel: QuoteModel) {
         binding.shareButton.setOnClickListener {
-            val message = quotesItem.quotes
+            val message = quoteModel.quote
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, message)

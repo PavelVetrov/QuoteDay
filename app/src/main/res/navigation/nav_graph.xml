@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.quoteday.presentation.homefragment.HomeFragment"
+        android:name="com.example.quoteday.presentation.home.HomeFragment"
         android:label="Quotes day"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.quoteday.presentation.favoritefragment.FavoriteFragment"
+        android:name="com.example.quoteday.presentation.favorite.FavoriteFragment"
         android:label="Favorite quotes"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/quotesFragment"
-        android:name="com.example.quoteday.presentation.quotesfragment.QuotesFragment"
+        android:name="com.example.quoteday.presentation.quotes.QuotesFragment"
         android:label="Quotes List"
         tools:layout="@layout/fragment_quotes" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.quoteday.presentation.settingsfragment.SettingsFragment"
+        android:name="com.example.quoteday.presentation.settings.SettingsFragment"
         android:label="Fragment settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

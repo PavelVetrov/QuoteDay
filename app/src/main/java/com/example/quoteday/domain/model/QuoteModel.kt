@@ -2,11 +2,11 @@ package com.example.quoteday.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class QuotesItem(
+data class QuoteModel(
     @SerializedName("a")
     val author: String,
     @SerializedName("q")
-    val quotes: String,
+    val quote: String,
     @SerializedName("c")
-    var id: Int,
+    val id: Int,
 )

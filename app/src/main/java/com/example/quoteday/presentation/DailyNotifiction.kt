@@ -29,10 +29,10 @@ class DailyNotification : BroadcastReceiver() {
             if (dailyQuote.isSuccessful) {
                 dailyQuote.body()?.let {
                     val getQuotesDaily = it[0]
-                    val massageQuote = getQuotesDaily.quotes
+                    val massageQuote = getQuotesDaily.quote
                     val massageAuthor = getQuotesDaily.author
                     val notification = NotificationCompat.Builder(context, CHANNEL)
-                        .setSmallIcon(R.drawable.ic_baseline_grade_24)
+                        .setSmallIcon(R.drawable.ic_grade)
                         .setContentTitle(massageAuthor)
                         .setContentText(massageQuote)
                         .setStyle(NotificationCompat.BigTextStyle())

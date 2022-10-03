@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.settingsfragment
+package com.example.quoteday.presentation.settings
 
 import android.app.AlarmManager
 import android.app.NotificationChannel

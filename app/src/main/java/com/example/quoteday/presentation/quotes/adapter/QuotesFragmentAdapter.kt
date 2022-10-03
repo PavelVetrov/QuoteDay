@@ -1,15 +1,15 @@
-package com.example.quoteday.presentation.quotesfragment.adapter
+package com.example.quoteday.presentation.quotes.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.quoteday.databinding.QuotesItemBinding
-import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.presentation.utils.QuotesFragmentDiffCallBack
 
 class QuotesFragmentAdapter :
-    ListAdapter<QuotesItem, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()){
+    ListAdapter<QuoteModel, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()){
 
     var onClickListenerSaveFavorite: OnClickListenerSaveFavorite? = null
     var onClickListenerShareQuote: OnClickListenerShareQuote? = null
@@ -28,7 +28,7 @@ class QuotesFragmentAdapter :
             buttonSave.tag = quotes
             shareButton.tag = quotes
 
-            quotesText.text = quotes.quotes
+            quotesText.text = quotes.quote
             quoteAuthor.text = quotes.author
             buttonSave.setOnClickListener {
                 buttonSave.animate().apply {
@@ -45,11 +45,11 @@ class QuotesFragmentAdapter :
         }
     }
     interface OnClickListenerSaveFavorite {
-        fun onClickSaveFavorite(quotesItem: QuotesItem)
+        fun onClickSaveFavorite(quoteModel: QuoteModel)
     }
 
     interface OnClickListenerShareQuote {
-        fun onClickShare(quotesItem: QuotesItem)
+        fun onClickShare(quoteModel: QuoteModel)
     }
 
 }

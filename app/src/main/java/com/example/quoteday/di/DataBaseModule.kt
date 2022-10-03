@@ -3,7 +3,7 @@ package com.example.quoteday.di
 import android.content.Context
 import androidx.room.Room
 import com.example.quoteday.data.database.AppDataBase
-import com.example.quoteday.data.database.QuotesItemDao
+import com.example.quoteday.data.database.QuotesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,8 +27,8 @@ class DataBaseModule {
 
     @Provides
     @Singleton
-    fun provideDao(dataBase: AppDataBase): QuotesItemDao {
-        return dataBase.quotesItemDao()
+    fun provideDao(dataBase: AppDataBase): QuotesDao {
+        return dataBase.quotesDao()
     }
 
     companion object {

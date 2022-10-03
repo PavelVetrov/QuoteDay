@@ -1,27 +1,28 @@
-package com.example.quoteday.presentation.quotesfragment
+package com.example.quoteday.presentation.quotes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quoteday.domain.model.Quotes
-import com.example.quoteday.domain.model.QuotesItem
+import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.domain.usecases.AddFavoriteQuoteUseCase
 import com.example.quoteday.domain.usecases.GetQuotesListDtoUseCase
 import com.example.quoteday.presentation.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModalQuotesFragment @Inject constructor(
+class QuotesViewModal @Inject constructor(
     private val addFavoriteQuoteUseCase: AddFavoriteQuoteUseCase,
     private val getQuotesListDto: GetQuotesListDtoUseCase
 ) : ViewModel() {
 
     private val errorHandler = CoroutineExceptionHandler { _, error ->
-        _viewStateQuotes.value = ViewState(e = error)
+        _viewStateQuotes.value = ViewState(error = error)
     }
     private val _viewStateQuotes = MutableLiveData<ViewState>()
     val viewStateQuotes: LiveData<ViewState> = _viewStateQuotes
@@ -40,9 +41,9 @@ class ViewModalQuotesFragment @Inject constructor(
             }
         }
     }
-    fun addFavoriteQuote(quotesItem: QuotesItem) {
+    fun addFavoriteQuote(quoteModel: QuoteModel) {
         viewModelScope.launch {
-            addFavoriteQuoteUseCase.invoke(quotesItem)
+            addFavoriteQuoteUseCase.invoke(quoteModel)
         }
     }
 }

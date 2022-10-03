@@ -1,3 +1,3 @@
 package com.example.quoteday.domain.model
 
-class Quotes : ArrayList<QuotesItem>()
+typealias Quotes = ArrayList<QuoteModel>
