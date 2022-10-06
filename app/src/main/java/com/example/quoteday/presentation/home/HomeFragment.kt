@@ -2,29 +2,25 @@ package com.example.quoteday.presentation.home
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.Bundle
-import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentHomeBinding
 import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.presentation.utils.BaseFragment
+import com.example.quoteday.presentation.utils.gone
+import com.example.quoteday.presentation.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel by viewModels<HomeQuoteViewModal>()
-    private var progressBar: FrameLayout? = null
-    private var errorHome: FrameLayout? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initLayout(view)
+    override fun viewBindingCreated(binding: FragmentHomeBinding) {
         showProgressBar()
         quotesObserve()
     }
+
     private fun quotesObserve() {
         viewModel.getQuoteDay()
         viewModel.viewState.observe(viewLifecycleOwner) { viewState ->
@@ -41,10 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             clickShareButton(response)
         }
     }
-    private fun initLayout(view: View) {
-        progressBar = view.findViewById(R.id.loading_home_layout)
-        errorHome = view.findViewById(R.id.error_home_layout)
-    }
+
     private fun clickFavoriteButton(quoteModel: QuoteModel) {
         binding.buttonFavorite.setOnClickListener {
             viewModel.addFavoriteQuote(quoteModel)
@@ -55,6 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             binding.buttonFavorite.setColorFilter(Color.RED)
         }
     }
+
     private fun clickShareButton(quoteModel: QuoteModel) {
         binding.shareButton.setOnClickListener {
             val message = quoteModel.quote
@@ -67,22 +61,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             startActivity(shareIntent)
         }
     }
+
     private fun showException() {
-        errorHome?.visibility = View.VISIBLE
-        binding.errorHomeLayout.buttonTry.setOnClickListener {
-            viewModel.getQuoteDay()
-            errorHome?.visibility = View.INVISIBLE
+        with(binding.errorHomeLayout) {
+            root.visible = true
+            buttonTry.setOnClickListener {
+                viewModel.getQuoteDay()
+                root.visible = false
+            }
         }
     }
+
     private fun showProgressBar() {
-        progressBar?.visibility = View.VISIBLE
+        binding.loadingHomeLayout.root.visible()
     }
+
     private fun hideProgressBar() {
-        progressBar?.visibility = View.INVISIBLE
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        errorHome = null
-        progressBar = null
+        binding.loadingHomeLayout.root.gone()
     }
 }
+
+

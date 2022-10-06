@@ -29,7 +29,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferences = requireActivity().getSharedPreferences(PREFERENCES_APP, MODE_PRIVATE)
-        defaultValues()
+        defaultValuesTimePicker()
         saveSettings()
         createNotificationChannel()
         behaviourSwitch()
@@ -133,7 +133,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         notificationManager.createNotificationChannel(channel)
     }
 
-    private fun defaultValues() {
+    private fun defaultValuesTimePicker() {
         val calendar = Calendar.getInstance()
         val hourTime = calendar.get(Calendar.HOUR)
         val minuteTime = calendar.get(Calendar.MINUTE)

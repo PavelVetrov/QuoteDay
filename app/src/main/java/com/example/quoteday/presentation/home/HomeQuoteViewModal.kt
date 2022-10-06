@@ -33,10 +33,11 @@ class HomeQuoteViewModal @Inject constructor(
             addFavoriteQuoteUseCase.invoke(quoteModel)
         }
     }
+
     fun getQuoteDay() {
         viewModelScope.launch(errorHandler) {
             val response = getQuoteDayUseCase.invoke()
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 response.body()?.let {
                     val getQuotesItem = it[0]
                     _responseQuoteDay.value = getQuotesItem

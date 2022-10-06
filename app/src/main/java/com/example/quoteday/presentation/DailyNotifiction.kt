@@ -21,7 +21,7 @@ class DailyNotification : BroadcastReceiver() {
 
     @Inject
     lateinit var quotesApi: QuotesApi
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onReceive(context: Context, intent: Intent) {
         coroutineScope.launch {
