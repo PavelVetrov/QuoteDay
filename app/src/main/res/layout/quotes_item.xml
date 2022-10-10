@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/quotes_favorite_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -28,21 +29,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/button_save"
+        <RadioButton
+            android:id="@+id/radioFavoriteButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_65"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_16"
-            android:contentDescription="@string/favorite_quote"
-            android:src="@drawable/ic_favorite"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:background="@android:color/transparent"
+            android:button="@android:color/transparent"
+            android:drawableStart="@drawable/favorite_button_selector"
+            android:drawablePadding="-5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/quote_author" />
 
         <ImageView
-            android:id="@+id/share_button"
+            android:id="@+id/share_button_quotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16"

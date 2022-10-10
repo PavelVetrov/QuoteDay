@@ -27,13 +27,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
     }
     private fun initRecycleView() {
         val rvAdapter = binding.rvFavoriteQuotes
-        viewAdapterFavoriteQuotes = QuotesFavoriteAdapter()
-        rvAdapter.adapter = viewAdapterFavoriteQuotes
-        viewAdapterFavoriteQuotes?.onClickListenerDeleteQuote =
-            object : QuotesFavoriteAdapter.OnClickListenerDeleteQuote {
-                override fun onClickDeleteQuote(quoteModel: QuoteModel) {
-                    viewModal.deleteQuotes(quoteModel)
-                }
+        viewAdapterFavoriteQuotes = QuotesFavoriteAdapter(object : QuotesFavoriteAdapter.OnClickListenerDeleteQuote {
+            override fun onClickDeleteQuote(quoteModel: QuoteModel) {
+                viewModal.deleteQuotes(quoteModel)
             }
+        })
+        rvAdapter.adapter = viewAdapterFavoriteQuotes
+
     }
 }

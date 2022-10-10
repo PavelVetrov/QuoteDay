@@ -1,8 +1,10 @@
 package com.example.quoteday.presentation.home
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentHomeBinding
 import com.example.quoteday.domain.model.QuoteModel
@@ -10,6 +12,8 @@ import com.example.quoteday.presentation.utils.BaseFragment
 import com.example.quoteday.presentation.utils.gone
 import com.example.quoteday.presentation.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -30,22 +34,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
 
         }
-        viewModel.responseQuoteDay.observe(viewLifecycleOwner) { response ->
-            binding.textQuote.text = response.quote
-            binding.textAuthor.text = response.author
-            clickFavoriteButton(response)
-            clickShareButton(response)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.responseQuoteDay.filterNotNull().collect { quoteModel ->
+                    binding.textQuote.text = quoteModel.quote
+                    binding.textAuthor.text = quoteModel.author
+                    clickFavoriteButton(quoteModel)
+                    clickShareButton(quoteModel)
+                }
+            }
         }
+
     }
 
     private fun clickFavoriteButton(quoteModel: QuoteModel) {
-        binding.buttonFavorite.setOnClickListener {
+        binding.radioFavoriteButtonHome.setOnClickListener {
             viewModel.addFavoriteQuote(quoteModel)
-            binding.buttonFavorite.animate().apply {
-                duration = 1000
-                rotationY(360f)
-            }.start()
-            binding.buttonFavorite.setColorFilter(Color.RED)
+            !binding.radioFavoriteButtonHome.isChecked
         }
     }
 

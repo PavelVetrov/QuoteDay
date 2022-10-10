@@ -10,6 +10,7 @@ import com.example.quoteday.domain.usecases.GetQuoteDayUseCase
 import com.example.quoteday.presentation.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,8 +26,10 @@ class HomeQuoteViewModal @Inject constructor(
     private val _viewStateHome = MutableLiveData<ViewState>()
     val viewState: LiveData<ViewState> = _viewStateHome
 
-    private val _responseQuoteDay = MutableLiveData<QuoteModel>()
-    val responseQuoteDay: LiveData<QuoteModel> = _responseQuoteDay
+    private val _responseQuoteDay =
+        MutableStateFlow<QuoteModel?>(null)
+    val responseQuoteDay: StateFlow<QuoteModel?> = _responseQuoteDay.asStateFlow()
+
 
     fun addFavoriteQuote(quoteModel: QuoteModel) {
         viewModelScope.launch {

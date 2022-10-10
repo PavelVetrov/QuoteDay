@@ -2,6 +2,9 @@ package com.example.quoteday.presentation.quotes
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentQuotesBinding
 import com.example.quoteday.domain.model.QuoteModel
@@ -10,6 +13,8 @@ import com.example.quoteday.presentation.utils.BaseFragment
 import com.example.quoteday.presentation.utils.gone
 import com.example.quoteday.presentation.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding::inflate) {
@@ -31,23 +36,24 @@ class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding
                 viewState.error != null -> showException()
             }
         }
-        viewModel.getQuotesList.observe(viewLifecycleOwner) { response ->
-            viewAdapterQuotes?.submitList(response)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.getQuotes.filterNotNull().collect { quotes ->
+                    viewAdapterQuotes?.submitList(quotes)
+                }
+            }
         }
+
     }
 
     private fun initRecycleView() {
         val viewAdapter = binding.rvQuotes
-        viewAdapterQuotes = QuotesFragmentAdapter()
-        viewAdapter.adapter = viewAdapterQuotes
-        viewAdapterQuotes?.onClickListenerSaveFavorite =
-            object : QuotesFragmentAdapter.OnClickListenerSaveFavorite {
+        viewAdapterQuotes =
+            QuotesFragmentAdapter(object : QuotesFragmentAdapter.OnClickListenerQuotes {
                 override fun onClickSaveFavorite(quoteModel: QuoteModel) {
                     viewModel.addFavoriteQuote(quoteModel)
                 }
-            }
-        viewAdapterQuotes?.onClickListenerShareQuote =
-            object : QuotesFragmentAdapter.OnClickListenerShareQuote {
+
                 override fun onClickShare(quoteModel: QuoteModel) {
                     val message = quoteModel.quote
                     val sendIntent: Intent = Intent().apply {
@@ -58,7 +64,9 @@ class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding
                     val shareIntent = Intent.createChooser(sendIntent, null)
                     startActivity(shareIntent)
                 }
-            }
+            })
+        viewAdapter.adapter = viewAdapterQuotes
+
     }
 
     private fun showException() {
