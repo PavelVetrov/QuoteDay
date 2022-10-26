@@ -1,13 +1,13 @@
 package com.example.quoteday.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.example.quoteday.data.database.QuotesDao
 import com.example.quoteday.data.network.QuotesApi
 import com.example.quoteday.domain.RepositoryQuotes
 import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.domain.model.Quotes
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
@@ -26,10 +26,11 @@ class RepositoryQuotesImpl @Inject constructor(
         quotesApi.getQuoteDay()
     }
 
-    override fun getFavoriteQuotes(): LiveData<List<QuoteModel>> =
-        Transformations.map(quotesDao.getQuotesList()) {
+    override fun getFavoriteQuotes(): Flow<List<QuoteModel>> {
+        return quotesDao.getQuotesList().map {
             mapper.mapListDbModalToEntity(it)
         }
+    }
 
     override suspend fun deleteFavoriteQuote(quoteModel: QuoteModel) {
         quotesDao.deleteQuote(quoteModel.id)

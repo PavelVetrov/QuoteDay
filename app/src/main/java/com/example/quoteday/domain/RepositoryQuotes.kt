@@ -3,6 +3,7 @@ package com.example.quoteday.domain
 import androidx.lifecycle.LiveData
 import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuoteModel
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface RepositoryQuotes {
@@ -11,7 +12,7 @@ interface RepositoryQuotes {
 
     suspend fun requestQuoteDay(): Response<Quotes>
 
-    fun getFavoriteQuotes(): LiveData<List<QuoteModel>>
+    fun getFavoriteQuotes(): Flow<List<QuoteModel>>
 
     suspend fun deleteFavoriteQuote(quoteModel: QuoteModel)
 
