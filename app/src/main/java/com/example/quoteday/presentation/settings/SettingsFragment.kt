@@ -18,7 +18,7 @@ import com.example.quoteday.databinding.FragmentSettingsBinding
 import com.example.quoteday.presentation.CHANNEL
 import com.example.quoteday.presentation.DailyNotification
 import com.example.quoteday.presentation.NOTIFICATION_ID
-import com.example.quoteday.presentation.utils.BaseFragment
+import com.example.core.extention.BaseFragment
 import java.util.*
 
 
