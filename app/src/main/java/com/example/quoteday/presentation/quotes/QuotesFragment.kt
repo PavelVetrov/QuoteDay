@@ -5,13 +5,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.core.extention.gone
+import com.example.core.extention.visible
 import com.example.quoteday.R
 import com.example.quoteday.databinding.FragmentQuotesBinding
 import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.presentation.quotes.adapter.QuotesFragmentAdapter
-import com.example.quoteday.presentation.utils.BaseFragment
-import com.example.quoteday.presentation.utils.gone
-import com.example.quoteday.presentation.utils.visible
+import com.example.core.extention.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch

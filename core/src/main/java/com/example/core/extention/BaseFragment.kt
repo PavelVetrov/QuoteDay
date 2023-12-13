@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.utils
+package com.example.core.extention
 
 import android.os.Bundle
 import android.view.LayoutInflater

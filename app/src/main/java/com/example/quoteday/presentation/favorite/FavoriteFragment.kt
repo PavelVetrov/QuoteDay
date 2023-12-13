@@ -9,7 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.quoteday.databinding.FragmentFavoriteBinding
 import com.example.quoteday.domain.model.QuoteModel
 import com.example.quoteday.presentation.favorite.adapter.QuotesFavoriteAdapter
-import com.example.quoteday.presentation.utils.BaseFragment
+import com.example.core.extention.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
