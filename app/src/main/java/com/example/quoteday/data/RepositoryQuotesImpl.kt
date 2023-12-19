@@ -1,6 +1,7 @@
 package com.example.quoteday.data
 
 import com.example.quoteday.data.database.QuotesDao
+import com.example.quoteday.data.mappers.QuotesMapper
 import com.example.quoteday.data.network.QuotesApi
 import com.example.quoteday.domain.RepositoryQuotes
 import com.example.quoteday.domain.model.QuoteModel

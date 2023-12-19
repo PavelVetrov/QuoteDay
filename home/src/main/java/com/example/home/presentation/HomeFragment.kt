@@ -1,16 +1,16 @@
-package com.example.quoteday.presentation.home
+package com.example.home.presentation
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.quoteday.R
-import com.example.quoteday.databinding.FragmentHomeBinding
-import com.example.quoteday.domain.model.QuoteModel
 import com.example.core.extention.BaseFragment
 import com.example.core.extention.gone
 import com.example.core.extention.visible
+import com.example.home.R
+import com.example.home.databinding.FragmentHomeBinding
+import com.example.home.domain.entity.QuoteModelHome
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -32,7 +32,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 viewState.isDownload -> hideProgressBar()
                 viewState.error != null -> showException()
             }
-
         }
 
         lifecycleScope.launch {
@@ -45,17 +44,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
             }
         }
-
     }
 
-    private fun clickFavoriteButton(quoteModel: QuoteModel) {
+    private fun clickFavoriteButton(quoteModel: QuoteModelHome) {
         binding.radioFavoriteButtonHome.setOnClickListener {
             viewModel.addFavoriteQuote(quoteModel)
             !binding.radioFavoriteButtonHome.isChecked
         }
     }
 
-    private fun clickShareButton(quoteModel: QuoteModel) {
+    private fun clickShareButton(quoteModel: QuoteModelHome) {
         binding.shareButton.setOnClickListener {
             val message = quoteModel.quote
             val sendIntent: Intent = Intent().apply {

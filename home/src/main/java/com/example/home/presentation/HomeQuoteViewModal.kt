@@ -1,13 +1,13 @@
-package com.example.quoteday.presentation.home
+package com.example.home.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.domain.model.QuoteModel
-import com.example.quoteday.domain.usecases.AddFavoriteQuoteUseCase
-import com.example.quoteday.domain.usecases.GetQuoteDayUseCase
-import com.example.quoteday.presentation.ViewState
+import com.example.home.domain.usecase.AddFavoriteQuoteUseCase
+import com.example.home.domain.usecase.GetQuoteDayUseCase
+import com.example.home.domain.entity.QuoteModelHome
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.*
@@ -21,17 +21,16 @@ class HomeQuoteViewModal @Inject constructor(
 ) : ViewModel() {
 
     private val errorHandler = CoroutineExceptionHandler { _, error ->
-        _viewStateHome.value = ViewState(error = error)
+        _viewStateHome.value = ViewStateHome(error = error)
     }
-    private val _viewStateHome = MutableLiveData<ViewState>()
-    val viewState: LiveData<ViewState> = _viewStateHome
+    private val _viewStateHome = MutableLiveData<ViewStateHome>()
+    val viewState: LiveData<ViewStateHome> = _viewStateHome
 
     private val _responseQuoteDay =
-        MutableStateFlow<QuoteModel?>(null)
-    val responseQuoteDay: StateFlow<QuoteModel?> = _responseQuoteDay.asStateFlow()
+        MutableStateFlow<QuoteModelHome?>(null)
+    val responseQuoteDay: StateFlow<QuoteModelHome?> = _responseQuoteDay.asStateFlow()
 
-
-    fun addFavoriteQuote(quoteModel: QuoteModel) {
+    fun addFavoriteQuote(quoteModel: QuoteModelHome) {
         viewModelScope.launch {
             addFavoriteQuoteUseCase.invoke(quoteModel)
         }
@@ -40,14 +39,8 @@ class HomeQuoteViewModal @Inject constructor(
     fun getQuoteDay() {
         viewModelScope.launch(errorHandler) {
             val response = getQuoteDayUseCase.invoke()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    val getQuotesItem = it[0]
-                    _responseQuoteDay.value = getQuotesItem
-                    _viewStateHome.value = ViewState(true)
-                }
-            }
-
+            _responseQuoteDay.value = response
+            _viewStateHome.value = ViewStateHome(true)
         }
     }
 }

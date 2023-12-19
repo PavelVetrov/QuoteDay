@@ -1,4 +1,4 @@
-package com.example.quoteday.data
+package com.example.quoteday.data.mappers
 
 import com.example.quoteday.data.database.QuotesItemEntity
 import com.example.quoteday.domain.model.QuoteModel
