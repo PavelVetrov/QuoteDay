@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.home.HomeFragment">
+    tools:context="com.example.home.presentation.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,12 +96,12 @@
 
     <include
         android:id="@+id/loading_home_layout"
-        layout="@layout/loading_layout"
+        layout="@layout/loading_layout_home"
         android:visibility="invisible" />
 
     <include
         android:id="@+id/error_home_layout"
-        layout="@layout/error_layout"
+        layout="@layout/error_layout_home"
         android:visibility="invisible" />
 
 </FrameLayout>
