@@ -1,16 +1,16 @@
-package com.example.quoteday.presentation.quotes
+package com.example.catalog.presentation
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.catalog.R
+import com.example.catalog.databinding.FragmentQuotesBinding
+import com.example.catalog.domain.entity.QuoteModelCatalog
+import com.example.catalog.presentation.adapter.QuotesFragmentAdapter
 import com.example.core.extention.gone
 import com.example.core.extention.visible
-import com.example.quoteday.R
-import com.example.quoteday.databinding.FragmentQuotesBinding
-import com.example.quoteday.domain.model.QuoteModel
-import com.example.quoteday.presentation.quotes.adapter.QuotesFragmentAdapter
 import com.example.core.extention.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
@@ -43,18 +43,17 @@ class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding
                 }
             }
         }
-
     }
 
     private fun initRecycleView() {
         val viewAdapter = binding.rvQuotes
         viewAdapterQuotes =
             QuotesFragmentAdapter(object : QuotesFragmentAdapter.OnClickListenerQuotes {
-                override fun onClickSaveFavorite(quoteModel: QuoteModel) {
+                override fun onClickSaveFavorite(quoteModel: QuoteModelCatalog) {
                     viewModel.addFavoriteQuote(quoteModel)
                 }
 
-                override fun onClickShare(quoteModel: QuoteModel) {
+                override fun onClickShare(quoteModel: QuoteModelCatalog) {
                     val message = quoteModel.quote
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
@@ -66,7 +65,6 @@ class QuotesFragment : BaseFragment<FragmentQuotesBinding>(FragmentQuotesBinding
                 }
             })
         viewAdapter.adapter = viewAdapterQuotes
-
     }
 
     private fun showException() {

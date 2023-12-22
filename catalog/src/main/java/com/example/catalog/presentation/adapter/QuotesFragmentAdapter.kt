@@ -1,22 +1,21 @@
-package com.example.quoteday.presentation.quotes.adapter
+package com.example.catalog.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.example.quoteday.R
-import com.example.quoteday.databinding.QuotesItemBinding
-import com.example.quoteday.domain.model.QuoteModel
-import com.example.quoteday.presentation.utils.QuotesFragmentDiffCallBack
+import com.example.catalog.R
+import com.example.catalog.databinding.QuotesItemBinding
+import com.example.catalog.domain.entity.QuoteModelCatalog
 
 class QuotesFragmentAdapter(
     private val onClickListenerQuotes: OnClickListenerQuotes
 ) :
-    ListAdapter<QuoteModel, QuoteFragmentViewHolder>(QuotesFragmentDiffCallBack()),
+    ListAdapter<QuoteModelCatalog, QuoteFragmentViewHolder>(QuotesCatalogFragmentDiffCallBack()),
     View.OnClickListener {
 
     override fun onClick(v: View) {
-        val quoteModel = v.tag as QuoteModel
+        val quoteModel = v.tag as QuoteModelCatalog
         when (v.id) {
             R.id.radioFavoriteButton -> onClickListenerQuotes.onClickSaveFavorite(quoteModel)
             R.id.share_button_quotes -> onClickListenerQuotes.onClickShare(quoteModel)
@@ -48,10 +47,9 @@ class QuotesFragmentAdapter(
     }
 
     interface OnClickListenerQuotes {
-        fun onClickSaveFavorite(quoteModel: QuoteModel)
-        fun onClickShare(quoteModel: QuoteModel)
+        fun onClickSaveFavorite(quoteModel: QuoteModelCatalog)
+        fun onClickShare(quoteModel: QuoteModelCatalog)
     }
-
 
 }
 
