@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_quotes" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.quoteday.presentation.settings.SettingsFragment"
+        android:name="com.example.settings.presentation.SettingsFragment"
         android:label="Fragment settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
