@@ -1,14 +1,13 @@
-package com.example.quoteday.presentation.quotes
+package com.example.catalog.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.domain.model.Quotes
-import com.example.quoteday.domain.model.QuoteModel
-import com.example.quoteday.domain.usecases.AddFavoriteQuoteUseCase
-import com.example.quoteday.domain.usecases.GetQuotesListDtoUseCase
-import com.example.quoteday.presentation.ViewState
+import com.example.catalog.domain.entity.QuoteModelCatalog
+import com.example.catalog.domain.entity.QuotesCatalog
+import com.example.catalog.domain.usecase.AddFavoriteQuoteUseCase
+import com.example.catalog.domain.usecase.GetQuotesListDtoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,26 +23,22 @@ class QuotesViewModal @Inject constructor(
 ) : ViewModel() {
 
     private val errorHandler = CoroutineExceptionHandler { _, error ->
-        _viewStateQuotes.value = ViewState(error = error)
+        _viewStateQuotes.value = ViewStateCatalog(error = error)
     }
-    private val _viewStateQuotes = MutableLiveData<ViewState>()
-    val viewStateQuotes: LiveData<ViewState> = _viewStateQuotes
+    private val _viewStateQuotes = MutableLiveData<ViewStateCatalog>()
+    val viewStateQuotes: LiveData<ViewStateCatalog> = _viewStateQuotes
 
-    private val _getQuotes = MutableStateFlow<Quotes?>(null)
-    val getQuotes: StateFlow<Quotes?> = _getQuotes.asStateFlow()
+    private val _getQuotes = MutableStateFlow<QuotesCatalog?>(null)
+    val getQuotes: StateFlow<QuotesCatalog?> = _getQuotes.asStateFlow()
 
     fun getQuotesList() {
         viewModelScope.launch(errorHandler) {
             val quotesList = getQuotesListDto.invoke()
-            if (quotesList.isSuccessful) {
-                quotesList.body()?.let {
-                    _getQuotes.value = it
-                    _viewStateQuotes.value = ViewState(true)
-                }
-            }
+            _getQuotes.value = quotesList
+            _viewStateQuotes.value = ViewStateCatalog(true)
         }
     }
-    fun addFavoriteQuote(quoteModel: QuoteModel) {
+    fun addFavoriteQuote(quoteModel: QuoteModelCatalog) {
         viewModelScope.launch {
             addFavoriteQuoteUseCase.invoke(quoteModel)
         }

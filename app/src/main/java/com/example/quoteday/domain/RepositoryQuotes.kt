@@ -1,6 +1,5 @@
 package com.example.quoteday.domain
 
-import androidx.lifecycle.LiveData
 import com.example.quoteday.domain.model.Quotes
 import com.example.quoteday.domain.model.QuoteModel
 import kotlinx.coroutines.flow.Flow

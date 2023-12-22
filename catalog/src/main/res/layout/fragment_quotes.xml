@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.quotes.QuotesFragment">
+    tools:context="com.example.catalog.presentation.QuotesFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,10 +25,10 @@
     </LinearLayout>
     <include
         android:id="@+id/loading_quotes_layout"
-        layout="@layout/loading_layout"
+        layout="@layout/loading_layout_catalog"
         android:visibility="invisible" />
     <include
         android:id="@+id/error_quotes_layout"
-        layout="@layout/error_layout"
+        layout="@layout/error_layout_catalog"
         android:visibility="invisible" />
 </FrameLayout>
