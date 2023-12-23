@@ -1,10 +1,10 @@
-package com.example.quoteday.presentation.favorite
+package com.example.favorite.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quoteday.domain.model.QuoteModel
-import com.example.quoteday.domain.usecases.DeleteFavoriteQuoteUseCase
-import com.example.quoteday.domain.usecases.GetFavoriteQuotesUseCase
+import com.example.favorite.domain.entity.QuoteModalFavorite
+import com.example.favorite.domain.usecase.DeleteFavoriteQuoteUseCase
+import com.example.favorite.domain.usecase.GetFavoriteQuotesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +17,7 @@ class FavoriteQuotesViewModal @Inject constructor(
 
     val favoriteQuotes = favoriteQuotesDbUseCase()
 
-    fun deleteQuotes(quoteModel: QuoteModel) {
+    fun deleteQuotes(quoteModel: QuoteModalFavorite) {
         viewModelScope.launch {
             deleteFavoriteQuoteUseCase.invoke(quoteModel)
         }

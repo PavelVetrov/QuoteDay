@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.quoteday.presentation.favorite.FavoriteFragment"
+        android:name="com.example.favorite.presentation.FavoriteFragment"
         android:label="Favorite quotes"
         tools:layout="@layout/fragment_favorite" />
     <fragment
