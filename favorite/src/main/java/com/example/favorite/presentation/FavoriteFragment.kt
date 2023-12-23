@@ -1,4 +1,4 @@
-package com.example.quoteday.presentation.favorite
+package com.example.favorite.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.quoteday.databinding.FragmentFavoriteBinding
-import com.example.quoteday.domain.model.QuoteModel
-import com.example.quoteday.presentation.favorite.adapter.QuotesFavoriteAdapter
 import com.example.core.extention.BaseFragment
+import com.example.favorite.databinding.FragmentFavoriteBinding
+import com.example.favorite.domain.entity.QuoteModalFavorite
+import com.example.favorite.presentation.adapter.QuotesFavoriteAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -41,7 +41,7 @@ class FavoriteFragment :
         val rvAdapter = binding.rvFavoriteQuotes
         viewAdapterFavoriteQuotes =
             QuotesFavoriteAdapter(object : QuotesFavoriteAdapter.OnClickListenerDeleteQuote {
-                override fun onClickDeleteQuote(quoteModel: QuoteModel) {
+                override fun onClickDeleteQuote(quoteModel: QuoteModalFavorite) {
                     viewModal.deleteQuotes(quoteModel)
                 }
             })

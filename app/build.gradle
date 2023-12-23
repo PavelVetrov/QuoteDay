@@ -76,5 +76,6 @@ dependencies {
     implementation project(":home")
     implementation project(":settings")
     implementation project(":catalog")
+    implementation project(":favorite")
 
 }
