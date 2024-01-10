@@ -23,6 +23,11 @@
             android:enabled="true" />
 
         <activity
+            android:name=".presentation.TestFragmentActivity"
+            android:exported="true" >
+        </activity>
+
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="true" >
             <intent-filter>

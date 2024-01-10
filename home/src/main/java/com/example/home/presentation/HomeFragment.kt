@@ -39,17 +39,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 viewModel.responseQuoteDay.filterNotNull().collect { quoteModel ->
                     binding.textQuote.text = quoteModel.quote
                     binding.textAuthor.text = quoteModel.author
+                    viewModel.getFavoriteQuotes(quoteModel)
                     clickFavoriteButton(quoteModel)
                     clickShareButton(quoteModel)
                 }
             }
         }
-    }
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.favoriteQuoteDay.collect { favoriteQuote ->
+                    binding.radioFavoriteButtonHome.isChecked = favoriteQuote
+                }
+            }
+        }
+    }
     private fun clickFavoriteButton(quoteModel: QuoteModelHome) {
         binding.radioFavoriteButtonHome.setOnClickListener {
             viewModel.addFavoriteQuote(quoteModel)
-            !binding.radioFavoriteButtonHome.isChecked
         }
     }
 

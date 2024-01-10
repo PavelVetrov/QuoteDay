@@ -17,4 +17,14 @@ class QuotesMapperHome @Inject constructor() {
         quote = quoteModel.quote,
         id = quoteModel.id
     )
+
+    private fun mapDbModalToEntity(dbModal: QuotesItemEntity) = QuoteModelHome(
+        author = dbModal.author,
+        quote = dbModal.quotes,
+        id = dbModal.id
+    )
+
+    fun mapListDbModalToEntity(quotesList: List<QuotesItemEntity>) = quotesList.map {
+        mapDbModalToEntity(it)
+    }
 }

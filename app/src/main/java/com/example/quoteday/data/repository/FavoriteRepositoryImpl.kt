@@ -20,6 +20,6 @@ class FavoriteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteFavoriteQuote(quoteModel: QuoteModalFavorite) {
-        quotesDao.deleteQuote(quoteModel.id)
+        quotesDao.deleteQuoteById(quoteModel.id)
     }
 }

@@ -13,7 +13,10 @@ interface QuotesDao {
     fun getQuotesList(): Flow<List<QuotesItemEntity>>
 
     @Query("DELETE FROM quotes_table WHERE id=:quoteItemId")
-    suspend fun deleteQuote(quoteItemId: Int)
+    suspend fun deleteQuoteById(quoteItemId: Int)
+
+    @Query("DELETE FROM quotes_table WHERE quotes=:quoteItem")
+    suspend fun deleteQuote(quoteItem: String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavoriteQuote(quotesItemEntity: QuotesItemEntity)
