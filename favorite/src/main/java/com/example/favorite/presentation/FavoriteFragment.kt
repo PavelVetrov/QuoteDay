@@ -29,9 +29,8 @@ class FavoriteFragment :
     private fun observeFavoriteQuotes() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModal.favoriteQuotes.collect() { quotesModel ->
+                viewModal.favoriteQuotes.collect { quotesModel ->
                     viewAdapterFavoriteQuotes?.submitList(quotesModel)
-
                 }
             }
         }
